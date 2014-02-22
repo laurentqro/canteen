@@ -1,8 +1,8 @@
 CantineApp::Application.routes.draw do
   resources :entries
-
-
   resources :feeds
+
+  root to: 'feeds#index'
 
 
   # The priority is based upon order of creation:
