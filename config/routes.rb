@@ -1,4 +1,6 @@
 CantineApp::Application.routes.draw do
+  devise_for :users
+
   resources :entries
   resources :feeds
 
