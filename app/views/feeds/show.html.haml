@@ -13,6 +13,13 @@
   %b Last updated:
   = @feed.last_updated
 
-= link_to 'Edit', edit_feed_path(@feed)
-\|
+-@feed.each do |feed|
+      -entry=feed.entry
+
+      %li.entry{:data => {:entry_id => entry.id, :feed_id => @feed.id}}
+        %p{id: "#{entry.id}"}
+          =link_to "#{feed.entry.title}", feed.entry.title
+
 = link_to 'Back', feeds_path
+
+    

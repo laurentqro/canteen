@@ -19,3 +19,56 @@
 = link_to 'Edit', edit_user_path(@user)
 
 = link_to 'Back', users_path
+
+
+-if current_user == @user
+  %h4 Your Details
+  %br
+  = image_tag @user.avatar
+  %br  
+  %h6 First Name
+  %p
+    =@user.first_name
+  %h6 Last Name
+  %p
+    =@user.last_name
+  %br
+  %h6 Your feeds
+    -current_user.feeds.each do |feed|
+      %p
+        = user.feed.title
+        %br
+  %br
+  %h6 User Email
+  %p
+    = @user.email
+  %br
+  %h6 User Bio
+  %p
+    =@user.bio
+  %br
+  =link_to 'Edit Profile',  edit_user_path(@user)
+  =link_to 'Delete Profile', @user, method: :delete, data: { confirm: 'Are you sure?' }
+
+-else
+  %h4 User Details
+  %br
+  = image_tag @user.avatar
+  %br  
+  %h6 First Name
+  %p
+    =@user.first_name
+  %h6 Last Name
+  %p
+    =@user.last_name
+  %br
+  %h6 Feeds subcribed to
+    -user.feeds.each do |feed|
+      %p
+        = user.feed.title
+        %br
+        / need to exclude private feeds
+  %br
+  %h6 User Bio
+  %p
+    =@user.bio

@@ -11,3 +11,14 @@
  *= require_self
  *= require_tree .
  */
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+#topbar {
+  background-color: #1a1a1a;
+  width: 100%;
+  padding: 10px 15px 5px 15px;
+}
