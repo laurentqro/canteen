@@ -13,6 +13,13 @@
 
 ActiveRecord::Schema.define(:version => 20140222165850) do
 
+  create_table "bookmarks", :force => true do |t|
+    t.integer  "entry_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "entries", :force => true do |t|
     t.string   "title"
     t.string   "url"
@@ -33,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20140222165850) do
     t.datetime "last_updated"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "feed_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
