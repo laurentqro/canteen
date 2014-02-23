@@ -4,6 +4,8 @@ CantineApp::Application.routes.draw do
   resources :entries
   resources :feeds
   resources :users
+  resources :subscriptions
+  resources :bookmarks
 
   root to: 'feeds#index'
 
