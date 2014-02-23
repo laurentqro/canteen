@@ -47,6 +47,7 @@ class FeedsController < ApplicationController
   # POST /feeds.json
   def create
     @feed = Feed.new
+      Feedzirra::Feed.add_common_feed_element 'image'
       feed = Feedzirra::Feed.fetch_and_parse(params[:feed][:url]) 
       # binding.pry
       if (feed == 0 || feed == 404 || feed == 408)
@@ -55,6 +56,8 @@ class FeedsController < ApplicationController
         @feed.title = feed.title
         @feed.gu_id = feed.etag
         @feed.url = feed.feed_url
+        @feed.image = feed.image
+        @feed.last_updated = feed.last_modified
         if Feed.exists?(url: feed.feed_url) 
           redirect_to Feed.find(Feed.where("url = '#{feed.feed_url}'")[0].id)
         else

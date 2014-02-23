@@ -8,7 +8,11 @@ class Entry < ActiveRecord::Base
       unless exists? gu_id: entry.id 
         create!(  
           title: entry.title,  
-          summary: entry.summary, 
+          summary: entry.summary,
+          url: entry.url,
+          author: entry.author,
+          published_on: entry.published, 
+          content: entry.content,
           gu_id: entry.id
         )  
       end
