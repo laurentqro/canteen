@@ -3,6 +3,7 @@ class FeedsController < ApplicationController
   # GET /feeds.json
   def index
     @feeds = Feed.all
+    @feed = Feed.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,11 @@ class FeedsController < ApplicationController
   # GET /feeds/1.json
   def show
     @feed = Feed.find(params[:id])
+    @entrie = @feed.fetch_and_parse(@feed.url).entries
+    Entry.update_from_feed(@feed.url)
+
+    # binding.pry
+    
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,17 +46,23 @@ class FeedsController < ApplicationController
   # POST /feeds
   # POST /feeds.json
   def create
-    @feed = Feed.new(params[:feed])
-
-    respond_to do |format|
-      if @feed.save
-        format.html { redirect_to @feed, notice: 'Feed was successfully created.' }
-        format.json { render json: @feed, status: :created, location: @feed }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @feed.errors, status: :unprocessable_entity }
-      end
-    end
+    @feed = Feed.new
+      feed = Feedzirra::Feed.fetch_and_parse(params[:feed][:url]) 
+      # binding.pry
+      if (feed == 0 || feed == 404 || feed == 408)
+        redirect_to @feed, notice: 'Invalid URL.'
+      else   
+        @feed.title = feed.title
+        @feed.gu_id = feed.etag
+        @feed.url = feed.feed_url
+        if Feed.exists?(url: feed.feed_url) 
+          redirect_to Feed.find(Feed.where("url = '#{feed.feed_url}'")[0].id)
+        else
+          @feed.save
+          redirect_to @feed
+        end
+      end 
+    # Feed.create_feed(params[:feed][:url])
   end
 
   # PUT /feeds/1
