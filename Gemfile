@@ -5,7 +5,7 @@ gem 'rails', '3.2.17'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-group :development do
+group :development, :test do
   gem 'sqlite3'
   gem 'pry-byebug'
 end
@@ -27,8 +27,9 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'devise'
 gem 'feedzirra'
+gem 'heroku'
 
-group :production do:
+group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
