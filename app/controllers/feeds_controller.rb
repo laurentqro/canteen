@@ -15,7 +15,6 @@ class FeedsController < ApplicationController
   # GET /feeds/1.json
   def show
     binding.pry
-
     @feed = Feed.find(params[:id])
     Entry.update_from_feed(@feed.url, @feed.id)
 
