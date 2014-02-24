@@ -12,17 +12,13 @@
 %p
   %b Last updated:
   = @feed.last_updated
-%p
-  %b Category:
-  = @feed.category
 
--@feed.each do |feed|
-      -entry=feed.entry
+- @feed.entries.each do |entry|
 
-      %li.entry{:data => {:entry_id => entry.id, :feed_id => @feed.id}}
-        %p{id: "#{entry.id}"}
-          =link_to "#{feed.entry.title}", feed.entry.title
+  %li.entry{:data => {:entry_id => entry.id, :feed_id => @feed.id}}
+    %p{id: "#{entry.id}"}
+      = link_to "#{entry.title}", entry
 
 = link_to 'Back', feeds_path
 
-    
+

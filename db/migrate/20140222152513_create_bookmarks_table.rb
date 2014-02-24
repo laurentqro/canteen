@@ -7,4 +7,7 @@ class CreateBookmarksTable < ActiveRecord::Migration
       t.timestamps
     end
   end
+
+  say "Created a table for bookmarks"
+
 end
