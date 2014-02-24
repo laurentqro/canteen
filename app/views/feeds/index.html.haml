@@ -1,21 +1,11 @@
-%h1 Listing feeds
+Popular Canteen Feeds
 
 %table
   %tr
-    %th Title
-    %th Url
-    %th Publisher url
-    %th Last updated
-    %th
     %th
     %th
 
   - @feeds.each do |feed|
     %tr
-      %td= feed.title
-      %td= feed.url
-      %td= feed.publisher_url
-      %td= feed.last_updated
-      %td= feed.category
-      %td= link_to 'Show', feed
-      %td= link_to 'Destroy', feed, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to "#{feed.image}", feed
+      %td= link_to "#{feed.title}", feed

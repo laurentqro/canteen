@@ -11,9 +11,9 @@
     =@user.last_name
   %br
   %h6 Your feeds
-    -current_user.feeds.each do |feed|
+    -current_user.subscriptions.each do |subscription|
       %p
-        = user.feed.title
+        = user.subscriptions.title
         %br
   %br
   %h6 User Email
