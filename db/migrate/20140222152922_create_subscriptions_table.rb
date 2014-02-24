@@ -7,4 +7,7 @@ class CreateSubscriptionsTable < ActiveRecord::Migration
       t.timestamps
     end
   end
+
+  say "Created a table for subscriptions"
+
 end
