@@ -1,3 +1,7 @@
+
+
+= render 'form'
+
 Popular Canteen Feeds
 
 %table
@@ -9,3 +13,8 @@ Popular Canteen Feeds
     %tr
       %td= link_to "#{feed.image}", feed
       %td= link_to "#{feed.title}", feed
+      - unless current_user.is_subscribed?(feed.id)
+        %td= link_to '+ subscribe', feed, method: :subscribe
+
+
+  

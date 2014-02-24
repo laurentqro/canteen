@@ -4,7 +4,7 @@ class FeedsController < ApplicationController
   def index
     @feeds = Feed.all
     @feed = Feed.new
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @feeds }
@@ -14,7 +14,7 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
-    binding.pry
+    
     @feed = Feed.find(params[:id])
     Entry.update_from_feed(@feed.url, @feed.id)
 
@@ -89,6 +89,21 @@ class FeedsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to feeds_url }
       format.json { head :no_content }
-    end
+    end 
   end
+
+  def subscribe
+    @feed = Feed.find(params[:id])
+    if current_user.is_subscribed?(@feed.id) 
+      redirect_to Feed.find(params[:id])
+    else  
+      @subscription = Subscription.new
+      @subscription.user_id = current_user.id
+      @subscription.feed_id = params[:id]
+      @subscription.save
+      redirect_to Feed.find(params[:id])
+    end 
+  end
+
+
 end

@@ -10,4 +10,14 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
 
+
+  def is_subscribed?(feed_id)
+    user_id = self.id
+    if Subscription.exists?(user_id: user_id, feed_id: feed_id)
+      return true
+    end
+  end
+
+
+
 end
