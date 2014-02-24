@@ -15,7 +15,7 @@ class FeedsController < ApplicationController
   # GET /feeds/1.json
   def show
     @feed = Feed.find(params[:id])
-    Entry.update_from_feed(@feed.url, @feed.id)
+    Entry.update_from_feed(@feed.feed_url, @feed.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -50,7 +50,7 @@ class FeedsController < ApplicationController
     else
       feed.title = parsed_feed.title
       feed.gu_id = parsed_feed.etag
-      feed.url = parsed_feed.feed_url
+      feed.feed_url = parsed_feed.feed_url
       feed.image = parsed_feed.image
       feed.last_updated = parsed_feed.last_modified
 

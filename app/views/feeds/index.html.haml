@@ -7,5 +7,5 @@ Popular Canteen Feeds
 
   - @feeds.each do |feed|
     %tr
-      %td= link_to "#{feed.image}", feed
+      %td= link_to image_tag("#{feed.image}"), feed
       %td= link_to "#{feed.title}", feed
