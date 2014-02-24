@@ -22,7 +22,10 @@
           = "subscription index"
 
         - else
-          = render 'devise/sessions/new.html.haml'
+          - unless content_for?(:sidebar) 
+            = render('devise/sessions/new.html.haml')
+
+          = yield(:sidebar)
           %br
 
         = link_to 'New Feed', new_subscription_path, :id => 'newsubscriptionbutton'
