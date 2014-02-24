@@ -14,8 +14,9 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
+    binding.pry
+
     @feed = Feed.find(params[:id])
-    @entries = @feed.fetch_and_parse(@feed.url).entries
     Entry.update_from_feed(@feed.url, @feed.id)
 
     respond_to do |format|

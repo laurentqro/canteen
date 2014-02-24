@@ -41,6 +41,7 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions.json
   def create
     @subscription = Subscription.new(params[:subscription])
+    @subscription.user_id = current_user.id
 
     respond_to do |format|
       if @subscription.save
