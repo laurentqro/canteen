@@ -34,17 +34,18 @@ body {
 }
 
 #sidebar {
-  padding: 5px 10px;
+  padding-top: 5px;
+  padding-left: 10px;
   background-color: #e4e4e4;
   width: 20%; 
-  height: 96%;
+  height: 100%;
   float: left;
   border-right: 1px solid #af0000;
   margin-right: 20px;
 }
 
 #reader {
-  height: 96%;
+  height: 100%;
   padding: 20px;
 }
 
@@ -53,5 +54,10 @@ body {
   bottom: 0;
   width: 20%;
   text-align: center;
-  padding-bottom: 10px;
+}
+
+.feedtile {
+  width: 150px;
+  height: 150px;
+  padding: 50px;
 }
