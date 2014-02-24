@@ -16,10 +16,10 @@ class FeedsController < ApplicationController
   def show
     @feed = Feed.find(params[:id])
     @entries = @feed.fetch_and_parse(@feed.url).entries
-    Entry.update_from_feed(@feed.url)
+    Entry.update_from_feed(@feed.url, @feed.id)
 
     # binding.pry
-    
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -48,23 +48,23 @@ class FeedsController < ApplicationController
   def create
     @feed = Feed.new
       Feedzirra::Feed.add_common_feed_element 'image'
-      feed = Feedzirra::Feed.fetch_and_parse(params[:feed][:url]) 
+      feed = Feedzirra::Feed.fetch_and_parse(params[:feed][:url])
       # binding.pry
       if (feed == 0 || feed == 404 || feed == 408)
         redirect_to @feed, notice: 'Invalid URL.'
-      else   
+      else
         @feed.title = feed.title
         @feed.gu_id = feed.etag
         @feed.url = feed.feed_url
         @feed.image = feed.image
         @feed.last_updated = feed.last_modified
-        if Feed.exists?(url: feed.feed_url) 
+        if Feed.exists?(url: feed.feed_url)
           redirect_to Feed.find(Feed.where("url = '#{feed.feed_url}'")[0].id)
         else
           @feed.save
           redirect_to @feed
         end
-      end 
+      end
     # Feed.create_feed(params[:feed][:url])
   end
 
