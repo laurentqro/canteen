@@ -17,7 +17,7 @@
 
   %li.entry{:data => {:entry_id => entry.id, :feed_id => @feed.id}}
     %p{id: "#{entry.id}"}
-      = link_to "#{entry.title}", entry.title
+      = link_to "#{entry.title}", entry
 
 = link_to 'Back', feeds_path
 

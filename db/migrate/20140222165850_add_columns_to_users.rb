@@ -6,4 +6,7 @@ class AddColumnsToUsers < ActiveRecord::Migration
     add_column :users, :avatar, :string
     add_column :users, :role, :string
   end
+
+  say "Add name, bio, avatar and role to users"
+
 end
