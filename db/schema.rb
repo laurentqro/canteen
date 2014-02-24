@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(:version => 20140223163615) do
     t.string   "title"
     t.string   "url"
     t.string   "publisher_url"
-    t.datetime "last_modified"
+    t.datetime "last_updated"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.string   "etag"
+    t.string   "gu_id"
     t.string   "image"
     t.string   "feed_url"
   end

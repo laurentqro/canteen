@@ -17,12 +17,35 @@ body {
   padding: 0px;
 }
 
+.container, body, html {
+  height: 100%;
+  background-color: #e4e4e4;
+}
+
 #topbar {
   background-color: #1a1a1a;
   width: 100%;
+  height: 3%;
   padding: 10px 15px 5px 15px;
 }
 
 #logo {
   width: 200px;
+}
+
+#sidebar {
+  background-color: #e4e4e4;
+  width: 20%; 
+  height: 97%;
+  float: left;
+  border-right: 1px solid #af0000;
+}
+
+#reader {
+  height: 97%;
+}
+
+#newsubscriptionbutton {
+  position: absolute;
+  bottom: 0;
 }

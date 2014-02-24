@@ -4,14 +4,17 @@
   = devise_error_messages!
 
   = f.label :email
+  %br
   = f.email_field :email, :autofocus => true
-
+  %br
   = f.label :password
+  %br
   = f.password_field :password
-
+  %br
   = f.label :password_confirmation
+  %br
   = f.password_field :password_confirmation
-
+  %br
   = f.submit "Sign up"
 
 = render "devise/shared/links"
