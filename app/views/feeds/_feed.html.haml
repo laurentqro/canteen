@@ -1,0 +1,11 @@
+Popular Canteen Feeds
+
+%table
+  %tr
+    %th
+    %th
+
+  - @feeds.each do |feed|
+    %tr
+      %td= link_to "#{feed.image}", feed
+      %td= link_to "#{feed.title}", feed
