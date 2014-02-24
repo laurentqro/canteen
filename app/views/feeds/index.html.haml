@@ -1,7 +1,5 @@
 %h1 Listing feeds
 
-= render 'form'
-
 %table
   %tr
     %th Title
@@ -18,10 +16,6 @@
       %td= feed.url
       %td= feed.publisher_url
       %td= feed.last_updated
+      %td= feed.category
       %td= link_to 'Show', feed
-      %td= link_to 'Edit', edit_feed_path(feed)
       %td= link_to 'Destroy', feed, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Feed', new_feed_path
