@@ -11,10 +11,9 @@
     =@user.last_name
   %br
   %h6 Your feeds
-    -current_user.subscriptions.each do |subscription|
-      %p
-        = user.subscriptions.title
-        %br
+  -current_user.subscriptions.each do |subscription|
+    = user.subscriptions.title
+  %br
   %br
   %h6 User Email
   %p
@@ -40,11 +39,11 @@
     =@user.last_name
   %br
   %h6 Feeds subcribed to
-    -user.feeds.each do |feed|
-      %p
-        = user.feed.title
-        %br
-        / need to exclude private feeds
+  -user.feeds.each do |feed|
+    %p
+      = user.feed.title
+  %br
+  / need to exclude private feeds
   %br
   %h6 User Bio
   %p
