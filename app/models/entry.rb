@@ -1,7 +1,7 @@
 class Entry < ActiveRecord::Base
   attr_accessible :author, :content, :feed_id, :image, :published_on, :summary, :title, :url, :gu_id
   belongs_to :feed
-  has_many :bookmarks
+  has_many :bookmarks, dependent: :destroy
   has_many :users, through: :bookmarks
 
 
@@ -13,6 +13,7 @@ class Entry < ActiveRecord::Base
           feed_id: feed_id,
           title: entry.title,
           summary: entry.summary,
+          image: entry.summary[/img.*?src="(.*?)"/i,1],
           url: entry.url,
           author: entry.author,
           published_on: entry.published,

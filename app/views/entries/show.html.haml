@@ -6,7 +6,8 @@
   %p
     = @entry.author
   %p
-    = @entry.image
+    -unless @entry.image == nil
+      = image_tag @entry.image
   %p
     = @entry.summary.html_safe
   %p
