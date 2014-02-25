@@ -24,7 +24,7 @@
         - if current_user
           = "Hello #{current_user.first_name} #{current_user.last_name}"
           %br
-          / = render('subscriptions/subscription.html.haml')
+          = render('subscriptions/subscription.html.haml')
 
         - else
           - unless content_for?(:sidebar) 
