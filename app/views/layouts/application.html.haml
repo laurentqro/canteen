@@ -22,15 +22,15 @@
 
       #sidebar
         - if current_user
-          = "Hello #{current_user.email} #{current_user.last_name}"
-          
+          = "Hello #{current_user.first_name} #{current_user.last_name}"
+          %br
+          / = render('subscriptions/subscription.html.haml')
 
         - else
           - unless content_for?(:sidebar) 
             = render('devise/sessions/new.html.haml')
 
           = yield(:sidebar)
-          %br
 
         = link_to 'New Feed', new_subscription_path, :id => 'newsubscriptionbutton'
       #reader
