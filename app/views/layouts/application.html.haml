@@ -14,10 +14,6 @@
         =link_to image_tag("logo.png", alt: "Canteen Logo", :id => 'logo'), feeds_path
         - if current_user
           = link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to logout?'}
-        %p.notice
-        = notice
-        %p.alert
-        = alert
         / search box on right
 
       #sidebar
@@ -43,13 +39,10 @@
                       %li= msg
 
               .field
-                = f.label :url
                 = f.text_field :url
               .actions
                 = f.submit 'Add Feed'
-
-        / = link_to 'New Feed', new_subscription_path, :id => 'newsubscriptionbutton'
-
+                
       #reader
         = yield
 
