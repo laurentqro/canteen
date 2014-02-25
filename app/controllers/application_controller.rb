@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   def setup_feed_instance_variable
     @feed = Feed.new
   end
- 
-  
+
+
 end

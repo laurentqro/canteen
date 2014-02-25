@@ -28,6 +28,8 @@
     %li.entry{:data => {:entry_id => entry.id, :feed_id => @feed.id}}
       %p{id: "#{entry.id}"}
         = link_to "#{entry.title}", entry
+      - if current_user && current_user.has_bookmarked?(entry.id) != true
+        = link_to 'bookmark', entry, method: :bookmark
 
 / = link_to 'Back', feeds_path
 
