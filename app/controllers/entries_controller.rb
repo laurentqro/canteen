@@ -94,5 +94,5 @@ class EntriesController < ApplicationController
     end 
   end
     
-  end
+  
 end
