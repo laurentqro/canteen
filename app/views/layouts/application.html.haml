@@ -22,8 +22,8 @@
 
       #sidebar
         - if current_user
-          = "Hello #{current_user.first_name} #{current_user.last_name}"
-          = "subscription index"
+          = "Hello #{current_user.email} #{current_user.last_name}"
+          
 
         - else
           - unless content_for?(:sidebar) 

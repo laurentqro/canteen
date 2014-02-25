@@ -1,29 +1,22 @@
 %h1 Listing subscriptions
 
-%h2 Tagged Feeds
-- @tags.each do |tag|
-  %h3= tag.name   
-  - Subscription.tagged_with(tag.name).each do |subscription|
-    = subscription.feed.title
-    %br
-
-%h2 All Feeds
 %table
   %tr
+    %th User ID
     %th Feed ID
-    %th Tags
-    %th
     %th
 
   - @subscriptions.each do |subscription|
     %tr
-      %td= subscription.feed.title
+      %td= subscription.user_id
+      %td= subscription.feed_id
       - if subscription.tags.any?
         - subscription.tags.each do |tag|
           %td= link_to tag.name, tagged_url(:tag => tag.name)
       %td= link_to 'Show', subscription
       %td= link_to 'Edit', edit_subscription_path(subscription)
       %td= link_to 'Destroy', subscription, method: :delete, data: { :confirm => 'Are you sure?' }
-  
 
 
+
+= link_to 'New Subscription', new_subscription_path

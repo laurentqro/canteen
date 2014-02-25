@@ -10,10 +10,13 @@
     %tr
       %td= subscription.user_id
       %td= subscription.feed_id
+      - if subscription.tags.any?
+        - subscription.tags.each do |tag|
+          %td= link_to tag.name, tagged_url(:tag => tag.name)
       %td= link_to 'Show', subscription
       %td= link_to 'Edit', edit_subscription_path(subscription)
-      %td= link_to 'Destroy', subscription, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Destroy', subscription, method: :delete, data: { :confirm => 'Are you sure?' }
 
-%br
 
-= link_to 'New Subscription', new_subscription_path
+
+= link_to 'New Subscription', feeds_path

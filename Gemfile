@@ -10,7 +10,6 @@ group :development, :test do
   gem 'pry-byebug'
 end
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -23,6 +22,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'acts-as-taggable-on', '~> 2.3.1'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'devise'

@@ -60,4 +60,6 @@ body {
   width: 150px;
   height: 150px;
   padding: 50px;
+  border: solid red 5px;
+  margin-left: 20%;
 }

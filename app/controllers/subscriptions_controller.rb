@@ -2,8 +2,11 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions
   # GET /subscriptions.json
   def index
-    @subscriptions = Subscription.all
 
+    # add scope for current user in model
+    @subscriptions =  Subscription.where("user_id = '#{current_user.id}'")
+    @tags = Subscription.where("user_id = '#{current_user.id}'").tag_counts_on(:tags).order('count desc').limit(20)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @subscriptions }
@@ -41,6 +44,7 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions.json
   def create
     @subscription = Subscription.new(params[:subscription])
+    @subscription.user_id = current_user.id
 
     respond_to do |format|
       if @subscription.save
@@ -80,4 +84,13 @@ class SubscriptionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def tagged
+    if params[:tag].present? 
+      @subscriptions = Subscription.tagged_with(params[:tag])
+    else 
+      @subscriptions = Subscription.all
+    end  
+  end
+
 end
