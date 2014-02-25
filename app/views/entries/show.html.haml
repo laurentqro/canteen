@@ -12,10 +12,10 @@
     = @entry.author
   %p
     %b Image:
-    = @entry.image
+    = image_tag @entry.image
   %p
     %b Summary:
-    = @entry.summary
+    = @entry.summary.html_safe
   %p
     %b Content:
     = @entry.content
