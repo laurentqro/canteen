@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
     else
       @subscriptions = Feed.all
     end
+  end
 
   def setup_feeds
     @feeds = Feed.all
