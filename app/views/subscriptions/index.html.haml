@@ -1,16 +1,1 @@
-- @tags.each do |tag|
-  %h3= tag.name   
-  - Subscription.tagged_with(tag.name).each do |subscription|
-    = link_to subscription.feed.title, subscription.feed
-    .icon= link_to 'Edit', edit_subscription_path(subscription)
-    .icon= link_to 'Destroy', subscription, method: :delete, data: { :confirm => 'Are you sure?' }
-    %br
-
-%h3 Untagged Feeds
-
-- @subscriptions.each do |subscription|
-  - if !subscription.tags.any? && current_user.is_subscribed?(subscription.feed.id)
-    = link_to subscription.feed.title, subscription.feed
-    .icon= link_to 'Edit', edit_subscription_path(subscription)
-    .icon= link_to 'Destroy', subscription, method: :delete, data: { :confirm => 'Are you sure?' }
-    %br
+= render @subscriptions
