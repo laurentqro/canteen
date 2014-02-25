@@ -26,7 +26,9 @@ class ApplicationController < ActionController::Base
   end
 
   def setup_tags
-    @tags = Subscription.where("user_id = '#{current_user.id}'").tag_counts_on(:tags).order('count desc').limit(20)
+    if current_user
+      @tags = Subscription.where("user_id = '#{current_user.id}'").tag_counts_on(:tags).order('count desc').limit(20)
+    end
   end
 
 end
