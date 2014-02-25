@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-
   before_filter :setup_feeds, :setup_feed, :setup_subscription, :setup_subscriptions, :setup_tags
 
   private
