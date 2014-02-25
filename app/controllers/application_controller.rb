@@ -17,7 +17,11 @@ class ApplicationController < ActionController::Base
   end
 
   def setup_subscriptions
-    @subscriptions = User.find(current_user.id).subscriptions
+    if current_user
+      @subscriptions = User.find(current_user.id).subscriptions
+    else
+      @subscriptions = Feed.all
+    end
   end
 
 end
