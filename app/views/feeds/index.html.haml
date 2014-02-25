@@ -7,7 +7,7 @@ Popular Canteen Feeds
 
 - @feeds.each do |feed|
   .feedtile
-    = link_to image_tag(feed.image), feed
+    = link_to(image_tag(feed.image), feed) if feed.image
     = link_to "#{feed.title}", feed
     - if current_user && current_user.is_subscribed?(feed.id) != true
       = link_to '+ subscribe', feed, method: :subscribe
