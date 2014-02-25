@@ -32,20 +32,21 @@
 
           = yield(:sidebar)
 
-        #newsubscriptionbutton
-          = form_for @feed do |f|
-            - if @feed.errors.any?
-              #error_explanation
-                %h2= "#{pluralize(@feed.errors.count, "error")} prohibited this feed from being saved:"
-                %ul
-                  - @feed.errors.full_messages.each do |msg|
-                    %li= msg
+        - if current_user
+          #newsubscriptionbutton
+            = form_for @feed do |f|
+              - if @feed.errors.any?
+                #error_explanation
+                  %h2= "#{pluralize(@feed.errors.count, "error")} prohibited this feed from being saved:"
+                  %ul
+                    - @feed.errors.full_messages.each do |msg|
+                      %li= msg
 
-            .field
-              = f.label :url
-              = f.text_field :url
-            .actions
-              = f.submit 'Add Feed'
+              .field
+                = f.label :url
+                = f.text_field :url
+              .actions
+                = f.submit 'Add Feed'
 
         / = link_to 'New Feed', new_subscription_path, :id => 'newsubscriptionbutton'
 
