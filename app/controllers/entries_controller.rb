@@ -80,4 +80,19 @@ class EntriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def subscribe
+    @entry = Entry.find(params[:id])
+    if current_user.has_bookmarked?(@feed.id) 
+      redirect_to Feed.find(params[:id])
+    else  
+      @subscription = Subscription.new
+      @subscription.user_id = current_user.id
+      @subscription.feed_id = params[:id]
+      @subscription.save
+      redirect_to Feed.find(params[:id])
+    end 
+  end
+    
+  
 end
