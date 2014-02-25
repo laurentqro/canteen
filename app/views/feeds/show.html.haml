@@ -1,27 +1,34 @@
 %p#notice= notice
 
-.feedimagebig
-  =@feed.image
+.feedcontainer
+  .feedimagebig
+    =@feed.image
 
-%p
-  %b Title:
-  = @feed.title
-%p
-  %b Feed URL:
-  = @feed.feed_url
-%p
-  %b Site:
-  = @feed.url
-%p
-  %b Last updated:
-  = @feed.last_updated
+  .feeddetails
+    %p
+      %b Title:
+      %br
+      = @feed.title
+    %p
+      %b Feed URL:
+      %br
+      = @feed.feed_url
+    %p
+      %b Site:
+      %br
+      = @feed.url
+    %p
+      %b Last updated:
+      %br
+      = @feed.last_updated
 
-- @feed.entries.each do |entry|
+.feedentries
+  - @feed.entries.each do |entry|
 
-  %li.entry{:data => {:entry_id => entry.id, :feed_id => @feed.id}}
-    %p{id: "#{entry.id}"}
-      = link_to "#{entry.title}", entry
+    %li.entry{:data => {:entry_id => entry.id, :feed_id => @feed.id}}
+      %p{id: "#{entry.id}"}
+        = link_to "#{entry.title}", entry
 
-= link_to 'Back', feeds_path
+/ = link_to 'Back', feeds_path
 
 
