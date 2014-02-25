@@ -21,7 +21,8 @@
     = @entry.content
   %p
     %b Published on:
-    = @entry.published_on.strftime("%a %d %b %Y")
+    -if @entry.published_on
+      = @entry.published_on.strftime("%a %d %b %Y")
   %p
     %b Feed:
     = @entry.feed_id

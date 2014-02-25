@@ -18,6 +18,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def has_bookmarked?(entry_id)
+    user_id = self.id
+    if Bookmark.exists?(user_id: user_id, entry_id: entry_id)
+      return true
+    end
+  end
 
 
 end

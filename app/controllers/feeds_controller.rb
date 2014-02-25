@@ -46,7 +46,7 @@ class FeedsController < ApplicationController
     parsed_feed = Feedzirra::Feed.fetch_and_parse(params[:feed][:url])
     feed = Feed.new
     if (parsed_feed == 0 || parsed_feed == 404 || parsed_feed == 408)
-      redirect_to root, notice: 'Invalid URL.'
+      redirect_to root_path, notice: 'Invalid URL.'
     else
       feed.title = parsed_feed.title
       feed.gu_id = parsed_feed.etag
@@ -54,8 +54,9 @@ class FeedsController < ApplicationController
       feed.image = parsed_feed.image
       feed.last_updated = parsed_feed.last_modified
 
-      if Feed.exists?(url: parsed_feed.feed_url)
-        redirect_to Feed.find(Feed.where("url = '#{parsed_feed.feed_url}'")[0].id)
+
+      if Feed.exists?(feed_url: parsed_feed.feed_url)
+        redirect_to Feed.find(Feed.where("feed_url = '#{parsed_feed.feed_url}'")[0].id)
       else
         feed.save
         redirect_to root_path

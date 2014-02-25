@@ -4,8 +4,8 @@ class SubscriptionsController < ApplicationController
   def index
 
     # add scope for current user in model
-    @subscriptions =  Subscription.where("user_id = '#{current_user.id}'")
-    @tags = Subscription.where("user_id = '#{current_user.id}'").tag_counts_on(:tags).order('count desc').limit(20)
+    @subscriptions =  User.find(current_user).subscriptions
+    @tags = @subscriptions.tag_counts_on(:tags).order('count desc').limit(20)
     
     respond_to do |format|
       format.html # index.html.erb

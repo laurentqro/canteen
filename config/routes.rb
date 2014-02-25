@@ -11,6 +11,8 @@ CantineApp::Application.routes.draw do
 
   match 'feeds/:id', to: 'feeds#subscribe', as: :feeds_subscribe
 
+  match 'entries/:id', to: 'entries#bookmark', as: :entries_bookmark
+
   match 'tagged', to: 'subscriptions#tagged', :as => 'tagged'
 
 

@@ -81,16 +81,16 @@ class EntriesController < ApplicationController
     end
   end
 
-  def subscribe
+  def bookmark
     @entry = Entry.find(params[:id])
-    if current_user.has_bookmarked?(@feed.id) 
-      redirect_to Feed.find(params[:id])
+    if current_user.has_bookmarked?(@entry.id) 
+      redirect_to Entry.find(params[:id])
     else  
-      @subscription = Subscription.new
-      @subscription.user_id = current_user.id
-      @subscription.feed_id = params[:id]
-      @subscription.save
-      redirect_to Feed.find(params[:id])
+      @bookmark = Bookmark.new
+      @bookmark.user_id = current_user.id
+      @bookmark.entry_id = params[:id]
+      @bookmark.save
+      redirect_to Entry.find(params[:id])
     end 
   end
     

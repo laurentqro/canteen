@@ -1,6 +1,9 @@
 class Entry < ActiveRecord::Base
   attr_accessible :author, :content, :feed_id, :image, :published_on, :summary, :title, :url, :gu_id
   belongs_to :feed
+  has_many :bookmarks
+  has_many :users, through: :bookmarks
+
 
   def self.update_from_feed(feed_url, feed_id)
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)

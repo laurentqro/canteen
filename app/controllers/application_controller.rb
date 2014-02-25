@@ -4,9 +4,6 @@ class ApplicationController < ActionController::Base
   before_filter :setup_feeds, :setup_feed, :setup_subscription, :setup_subscriptions, :setup_tags
 
   private
-  def setup_feeds
-    @feeds = Feed.all
-  end
 
   def setup_feed
     @feed = Feed.new
@@ -17,7 +14,15 @@ class ApplicationController < ActionController::Base
   end
 
   def setup_subscriptions
-    @subscriptions = User.find(current_user.id).subscriptions
+    if current_user
+      @subscriptions = User.find(current_user.id).subscriptions
+    else
+      @subscriptions = Feed.all
+    end
+  end
+
+  def setup_feeds
+    @feeds = Feed.all
   end
 
   def setup_tags
