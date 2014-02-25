@@ -12,7 +12,8 @@
     = @entry.author
   %p
     %b Image:
-    = image_tag @entry.image
+    -unless @entry.image == nil
+      = image_tag @entry.image
   %p
     %b Summary:
     = @entry.summary.html_safe
