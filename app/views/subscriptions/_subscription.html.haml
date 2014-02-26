@@ -1,8 +1,10 @@
 - @tags.each do |tag|
   %h3= tag.name
   - Subscription.tagged_with(tag.name).each do |subscription|
+
     = link_to truncate(subscription.feed.title), subscription.feed
     .icon= link_to image_tag("trash.png", alt: "Remove subscription", :id => 'trash'), subscription.feed, method: :delete, data: { :confirm => 'Are you sure?' }
+
     .icon= link_to link_to image_tag("edit.png", alt: "Edit tags", :id => 'edit'), edit_subscription_path(subscription)
     %br
 
@@ -10,8 +12,10 @@
 
 - @subscriptions.each do |subscription|
   - if !subscription.tags.any? && current_user.is_subscribed?(subscription.feed.id)
+
     = link_to truncate(subscription.feed.title), subscription.feed
     .icon= link_to image_tag("trash.png", alt: "Remove subscription", :id => 'trash'), subscription.feed, method: :delete, data: { :confirm => 'Are you sure?' }
+
     .icon= link_to image_tag("edit.png", alt: "Edit tags", :id => 'edit'), edit_subscription_path(subscription)
     %br
 
