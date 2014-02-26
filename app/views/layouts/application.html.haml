@@ -15,10 +15,10 @@
         - if current_user
           = link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to logout?'}
 
-        = search_form_for @q do |f|
-          = f.label :title_cont
-          = f.text_field :title_cont
-          = f.submit
+        = form_tag feeds_path, method: :get do
+          = label_tag :search
+          = text_field_tag :q, nil, placeholder: "feeds, entries, users ... "
+          = submit_tag "search"
 
       #sidebar
         - if current_user

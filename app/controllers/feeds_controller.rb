@@ -3,8 +3,15 @@ class FeedsController < ApplicationController
   # GET /feeds.json
   def index
     @feed = Feed.new
-    @q = Feed.search(params[:q])
-    @feeds = @q.result(distinct: true)
+    if params[:q]
+      q = params[:q]
+
+      @feeds = Feed.search(title_cont: q).result(distinct: true)
+      @entries = Entry.search(title_cont: q).result(distinct: true)
+      @users = User.search(last_name_cont: q).result(distinct: true)
+    else
+      @feeds = Feed.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
