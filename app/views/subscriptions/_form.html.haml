@@ -8,6 +8,8 @@
   .field
     = f.label :tags
     = f.text_field :tag_list
+    = f.label "Private Subscription?"
+    = f.check_box :private, {}, true, false
   / private?
   .actions
     = f.submit 'Save'
