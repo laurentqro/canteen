@@ -133,6 +133,10 @@ a {
   float: left;
 }
 
+.userssimilar {
+  float: right;
+}
+
 .feedentries {
   clear: left;
   margin-top: 20px;
