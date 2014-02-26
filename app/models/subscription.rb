@@ -1,5 +1,5 @@
 class Subscription < ActiveRecord::Base
-  attr_accessible :user_id, :feed_id, :tag_list
+  attr_accessible :user_id, :feed_id, :tag_list, :private
   belongs_to :user
   belongs_to :feed
 

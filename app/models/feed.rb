@@ -10,15 +10,6 @@ class Feed < ActiveRecord::Base
     end
   end
 
-  def auto_subscribe(current_user)
-    if current_user.is_subscribed?(self.id)
-      redirect_to Feed.find(self.id)
-    else
-      @subscription = Subscription.new
-      @subscription.user_id = current_user.id
-      @subscription.feed_id = self.id
-      @subscription.save
-    end
-  end
+  
 
 end
