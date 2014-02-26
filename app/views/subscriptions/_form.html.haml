@@ -1,3 +1,21 @@
+.feedcontainer
+  .feedimagebig
+    -if @feed.image
+      = image_tag @feed.image
+    -else
+      .placeholderbig= image_tag("placeholder.png")
+
+  .feeddetails
+    %h2.title
+      = @feed.title
+    %p
+      = @feed.url
+    %p
+      -if @feed.last_updated
+        %b Last updated:
+        %br
+        = @feed.last_updated.strftime("%a %d %b %Y")
+
 = form_for @subscription do |f|
   - if @subscription.errors.any?
     #error_explanation
@@ -7,9 +25,12 @@
           %li= msg
   .field
     = f.label :tags
+    %br
     = f.text_field :tag_list
+    %br
+    %br
     = f.label "Private Subscription?"
     = f.check_box :private, {}, true, false
-  / private?
+    %br
   .actions
     = f.submit 'Save'
