@@ -28,6 +28,7 @@ gem 'haml-rails'
 gem 'devise'
 gem 'feedzirra'
 gem 'heroku'
+gem 'ransack'
 
 group :production do
   gem 'pg'
