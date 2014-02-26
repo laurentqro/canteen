@@ -80,7 +80,7 @@ class SubscriptionsController < ApplicationController
     @subscription.destroy
 
     respond_to do |format|
-      format.html { redirect_to subscriptions_url }
+      format.html { redirect_to feeds_path }
       format.json { head :no_content }
     end
   end
