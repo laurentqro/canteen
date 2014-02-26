@@ -24,8 +24,7 @@
 
       #sidebar
         - if current_user
-          = "Hello #{current_user.first_name} #{current_user.last_name}"
-          %br
+          %h3= "Hello #{current_user.first_name}"
           = render('subscriptions/subscription.html.haml')
 
         - else
