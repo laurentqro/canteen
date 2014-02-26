@@ -37,5 +37,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def auto_subscribe(feed)
+    if self.is_subscribed?(feed.id) != true
+      @subscription = Subscription.new
+      @subscription.user_id = self.id
+      @subscription.feed_id = feed.id
+      @subscription.save
+    end
+  end
 
 end
