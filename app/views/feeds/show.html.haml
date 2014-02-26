@@ -5,7 +5,7 @@
     = image_tag @feed.image
 
   .feeddetails
-    %p
+    %p.title
       %b Title:
       %br
       = @feed.title
@@ -21,6 +21,14 @@
       %b Last updated:
       %br
       = @feed.last_updated
+
+  .userssimilar
+    %p.title
+      %b Users that subscibe to this are also reading:
+      %br
+      - @feed.users.each do |user|
+        - user.subscriptions do |subscription|
+          %p= subscription.feed.title
 
 .feedentries
   - @feed.entries.each do |entry|
