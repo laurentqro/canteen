@@ -29,7 +29,8 @@
       %p{id: "#{entry.id}"}
         = link_to "#{entry.title}", entry
       - if current_user && current_user.has_bookmarked?(entry.id) != true
-        .icon= link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmark'), entry, method: :bookmark
+        .icon= link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmark'), controller: :entries, action: :bookmark
+        
 
 / = link_to 'Back', feeds_path
 
