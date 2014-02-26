@@ -64,9 +64,12 @@ class FeedsController < ApplicationController
 
 
       if Feed.exists?(feed_url: parsed_feed.feed_url)
-        redirect_to Feed.find(Feed.where("feed_url = '#{parsed_feed.feed_url}'")[0].id)
+        feed = Feed.find(Feed.where("feed_url = '#{parsed_feed.feed_url}'")[0].id)
+        current_user.auto_subscribe(feed)
+        redirect_to feed
       else
         feed.save
+        current_user.auto_subscribe(feed)
         redirect_to root_path
       end
     end
@@ -112,6 +115,8 @@ class FeedsController < ApplicationController
       redirect_to Feed.find(params[:id])
     end
   end
+
+  
 
 
 end
