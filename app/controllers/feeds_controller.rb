@@ -2,9 +2,10 @@ class FeedsController < ApplicationController
   # GET /feeds
   # GET /feeds.json
   def index
-    @feeds = Feed.all
     @feed = Feed.new
-    
+    @q = Feed.search(params[:q])
+    @feeds = @q.result(distinct: true)
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @feeds }
@@ -89,20 +90,20 @@ class FeedsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to feeds_url }
       format.json { head :no_content }
-    end 
+    end
   end
 
   def subscribe
     @feed = Feed.find(params[:id])
-    if current_user.is_subscribed?(@feed.id) 
+    if current_user.is_subscribed?(@feed.id)
       redirect_to Feed.find(params[:id])
-    else  
+    else
       @subscription = Subscription.new
       @subscription.user_id = current_user.id
       @subscription.feed_id = params[:id]
       @subscription.save
       redirect_to Feed.find(params[:id])
-    end 
+    end
   end
 
 
