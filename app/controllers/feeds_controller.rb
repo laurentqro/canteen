@@ -25,6 +25,8 @@ class FeedsController < ApplicationController
     @feed = Feed.find(params[:id])
     Entry.update_from_feed(@feed.feed_url, @feed.id)
 
+    @related_feeds = @feed.list_related_feeds(current_user)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @feed }
@@ -53,21 +55,19 @@ class FeedsController < ApplicationController
     Feedzirra::Feed.add_common_feed_element 'image'
     parsed_feed = Feedzirra::Feed.fetch_and_parse(params[:feed][:url])
     feed = Feed.new
-    if (parsed_feed == 0 || parsed_feed == 404 || parsed_feed == 408)
+    if Feed.parse_fail?(parsed_feed)
       redirect_to root_path, notice: 'Invalid URL.'
     else
-      feed.title = parsed_feed.title
-      feed.gu_id = parsed_feed.etag
-      feed.feed_url = parsed_feed.feed_url
-      feed.image = parsed_feed.image
-      feed.last_updated = parsed_feed.last_modified
-
-
       if Feed.exists?(feed_url: parsed_feed.feed_url)
         feed = Feed.find(Feed.where("feed_url = '#{parsed_feed.feed_url}'")[0].id)
         current_user.auto_subscribe(feed)
         redirect_to feed
       else
+        feed.title = parsed_feed.title
+        feed.gu_id = parsed_feed.etag
+        feed.feed_url = parsed_feed.feed_url
+        feed.image = parsed_feed.image
+        feed.last_updated = parsed_feed.last_modified
         feed.save
         current_user.auto_subscribe(feed)
         redirect_to root_path
@@ -78,17 +78,9 @@ class FeedsController < ApplicationController
   # PUT /feeds/1
   # PUT /feeds/1.json
   def update
-    @feed = Feed.find(params[:id])
+    # oh dear
+    create
 
-    respond_to do |format|
-      if @feed.update_attributes(params[:feed])
-        format.html { redirect_to @feed, notice: 'Feed was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @feed.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /feeds/1
@@ -115,6 +107,8 @@ class FeedsController < ApplicationController
       redirect_to Feed.find(params[:id])
     end
   end
+
+
 
   
 
