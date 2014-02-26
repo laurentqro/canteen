@@ -2,7 +2,10 @@
 
 .feedcontainer
   .feedimagebig
-    = image_tag @feed.image
+    -if @feed.image
+      = image_tag @feed.image
+    -else
+      .placeholderbig= image_tag("placeholder.png")
 
   .feeddetails
     %h2.title
@@ -36,5 +39,3 @@
         
 
 / = link_to 'Back', feeds_path
-
-

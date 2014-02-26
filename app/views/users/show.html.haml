@@ -11,10 +11,15 @@
     %h4 Your feeds
   .userfeeds
     -@current_user.subscriptions.each do |subscription|
-      .feedtileprofile
-        = link_to(image_tag(subscription.feed.image), feed_path) if subscription.feed.image
-        %br
-        = link_to "#{subscription.feed.title}", feed_path
+      .feedtileparent
+        .feedtileprofile
+          - if subscription.feed.image
+            = link_to(image_tag(subscription.feed.image), feed_path)
+          - else
+            .placeholder= link_to(image_tag("placeholder.png"), feed_path)
+          %br
+        .feedtiletext
+          = link_to "#{subscription.feed.title}", feed_path
   .userfeeds
     %h4 About Me
     %p
@@ -34,10 +39,15 @@
     %h4 Your feeds
   .userfeeds
     -@user.subscriptions.each do |subscription|
-      .feedtileprofile
-        = link_to(image_tag(subscription.feed.image), feed_path) if subscription.feed.image
-        %br
-        = link_to "#{subscription.feed.title}", feed_path
+      .feedtileparent
+        .feedtileprofile
+          - if subscription.feed.image
+            = link_to(image_tag(subscription.feed.image), feed_path)
+          - else
+            .placeholder= link_to(image_tag("placeholder.png"), feed_path)
+          %br
+        .feedtiletext
+          = link_to "#{subscription.feed.title}", feed_path
   .userfeeds
     %h4 About Me
     %p
