@@ -34,8 +34,9 @@
     %li.entry{:data => {:entry_id => entry.id, :feed_id => @feed.id}}
       %p{id: "#{entry.id}"}
         = link_to "#{entry.title}", entry
+    
       - if current_user && current_user.has_bookmarked?(entry.id) != true
-        .icon= link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmark'), controller: :entries, action: :bookmark
-        
-
+        .icon= link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmark'), entries_bookmark_path(entry)
+      - else
+        .icon= link_to image_tag("bookmark2.png", alt: "Bookmark", :id => 'bookmark'), entries_bookmark_path(entry)
 / = link_to 'Back', feeds_path

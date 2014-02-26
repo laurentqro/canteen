@@ -86,13 +86,13 @@ class EntriesController < ApplicationController
     if current_user.has_bookmarked?(@entry.id)
       bookmark = Bookmark.where('user_id = ? AND entry_id = ?', current_user.id, @entry.id)[0]
       bookmark.destroy
-      redirect_to Entry.find(params[:id])
+      redirect_to @entry.feed
     else  
       @bookmark = Bookmark.new
       @bookmark.user_id = current_user.id
       @bookmark.entry_id = params[:id]
       @bookmark.save
-      redirect_to Entry.find(params[:id])
+      redirect_to @entry.feed
     end 
   end
 
@@ -101,13 +101,13 @@ class EntriesController < ApplicationController
     if current_user.has_read?(@entry.id)
       read_entry = ReadEntry.where('user_id = ? AND entry_id = ?', current_user.id, @entry.id)[0]
       read_entry.destroy 
-      redirect_to Entry.find(params[:id])
+      redirect_to @entry.feed
     else  
       @read_entry = ReadEntry.new
       @read_entry.user_id = current_user.id
       @read_entry.entry_id = params[:id]
       @read_entry.save
-      redirect_to Entry.find(params[:id])
+      redirect_to @entry.feed
     end 
   end
     
