@@ -1,5 +1,5 @@
 - @tags.each do |tag|
-  %h3= tag.name   
+  %h3= tag.name
   - Subscription.tagged_with(tag.name).each do |subscription|
     = link_to subscription.feed.title, subscription.feed
     .icon= link_to image_tag("trash.png", alt: "Remove subscription", :id => 'trash'), subscription.feed, method: :delete, data: { :confirm => 'Are you sure?' }
@@ -8,7 +8,7 @@
 
 %h3 Untagged Feeds
 
-- @subscriptions.each do |subscription|
+- @user.subscriptions.each do |subscription|
   - if !subscription.tags.any? && current_user.is_subscribed?(subscription.feed.id)
     = link_to subscription.feed.title, subscription.feed
     .icon= link_to image_tag("trash.png", alt: "Remove subscription", :id => 'trash'), subscription.feed, method: :delete, data: { :confirm => 'Are you sure?' }

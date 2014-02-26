@@ -2,7 +2,7 @@
   %h4 Your Details
   %br
   = image_tag @user.avatar
-  %br  
+  %br
   %h6 First Name
   %p
     =@user.first_name
@@ -11,8 +11,8 @@
     =@user.last_name
   %br
   %h6 Your feeds
-  -current_user.subscriptions.each do |subscription|
-    = user.subscriptions.title
+  - @current_user.subscriptions.each do |subscription|
+    = subscription.feed.title
   %br
   %br
   %h6 User Email
@@ -30,7 +30,7 @@
   %h4 User Details
   %br
   = image_tag @user.avatar
-  %br  
+  %br
   %h6 First Name
   %p
     =@user.first_name

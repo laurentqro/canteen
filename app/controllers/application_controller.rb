@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :setup_feeds, :setup_feed, :setup_subscription, :setup_subscriptions, :setup_tags
+  before_filter :setup_feeds, :setup_feed, :setup_subscription, :setup_tags, :setup_current_user
 
   private
 
@@ -13,12 +13,8 @@ class ApplicationController < ActionController::Base
     @subscription = Subscription.new
   end
 
-  def setup_subscriptions
-    if current_user
-      @subscriptions = User.find(current_user.id).subscriptions
-    else
-      @subscriptions = Feed.all
-    end
+  def setup_current_user
+    @current_user = User.find(current_user.id) if current_user
   end
 
   def setup_feeds
