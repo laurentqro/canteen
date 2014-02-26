@@ -5,22 +5,24 @@
     = image_tag @feed.image
 
   .feeddetails
-    %p
-      %b Title:
-      %br
+    %h2.title
       = @feed.title
     %p
-      %b Feed URL:
-      %br
-      = @feed.feed_url
-    %p
-      %b Site:
-      %br
       = @feed.url
     %p
-      %b Last updated:
+      -if @feed.last_updated
+        %b Last updated:
+        %br
+        = @feed.last_updated.strftime("%a %d %b %Y")
+
+  .userssimilar
+    %p.title
+      %b Users that subscibe to this are also reading:
       %br
-      = @feed.last_updated
+      - @feed.users.each do |user|
+        - user.subscriptions.each do |subscription|
+          = link_to subscription.feed.title, subscription.feed
+          %br
 
 .feedentries
   - @feed.entries.each do |entry|
@@ -29,7 +31,8 @@
       %p{id: "#{entry.id}"}
         = link_to "#{entry.title}", entry
       - if current_user && current_user.has_bookmarked?(entry.id) != true
-        .icon= link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmark'), entry, method: :bookmark
+        .icon= link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmark'), controller: :entries, action: :bookmark
+        
 
 / = link_to 'Back', feeds_path
 

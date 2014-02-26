@@ -45,6 +45,11 @@ a {
   width: 200px;
 }
 
+#search {
+  float: right;
+  margin-right: 40px;
+}
+
 #bookmark {
   height: 10px;
 }
@@ -107,6 +112,15 @@ a {
   border-radius: 10px;
 }
 
+.feedtileprofile {
+  width: 100px;
+  height: 100px;
+  border: solid #af0000 1px;
+  margin: 0 20px 20px 0;
+  float: left;
+  border-radius: 10px;
+}
+
 .feedimagebig {
   width: 150px;
   height: 150px;
@@ -124,21 +138,29 @@ a {
   float: left;
 }
 
+.userssimilar {
+  float: right;
+}
+
 .feedentries {
   clear: left;
   margin-top: 20px;
 }
 
 textarea {
-  width: 170px;
+  width: 173px;
   height: 100px;
-}
-
-input {
-  width: 170px;
 }
 
 .icon {
   float: right;
   margin-right: 10px;
+}
+
+.userfeeds {
+  overflow: hidden;
+}
+
+.title {
+  margin-top: 0;
 }

@@ -1,0 +1,21 @@
+%h1 Listing read_entries
+
+%table
+  %tr
+    %th User
+    %th Entry
+    %th
+    %th
+    %th
+
+  - @read_entries.each do |read_entry|
+    %tr
+      %td= read_entry.user_id
+      %td= read_entry.entry_id
+      %td= link_to 'Show', read_entry
+      %td= link_to 'Edit', edit_read_entry_path(read_entry)
+      %td= link_to 'Destroy', read_entry, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Read entry', new_read_entry_path

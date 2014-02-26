@@ -8,7 +8,12 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :bio, :avatar, :email, :role, :password, :password_confirmation, :remember_me
 
   has_many :subscriptions, dependent: :destroy
+  has_many :read_entries, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+
+  has_many :feeds, through: :subscriptions
+  has_many :entries, through: :bookmarks
+  has_many :entries, through: :read_entries
 
 
   def is_subscribed?(feed_id)
@@ -25,5 +30,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def has_read?(entry_id)
+    user_id = self.id
+    if ReadEntry.exists?(user_id: user_id, entry_id: entry_id)
+      return true
+    end
+  end
+
+  def auto_subscribe(feed)
+    if self.is_subscribed?(feed.id) != true
+      @subscription = Subscription.new
+      @subscription.user_id = self.id
+      @subscription.feed_id = feed.id
+      @subscription.save
+    end
+  end
 
 end
