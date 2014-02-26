@@ -45,6 +45,11 @@ a {
   width: 200px;
 }
 
+#search {
+  float: right;
+  margin-right: 40px;
+}
+
 #bookmark {
   height: 10px;
 }
@@ -143,12 +148,8 @@ a {
 }
 
 textarea {
-  width: 170px;
+  width: 173px;
   height: 100px;
-}
-
-input {
-  width: 170px;
 }
 
 .icon {
