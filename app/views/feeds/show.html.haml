@@ -17,11 +17,12 @@
 
   .userssimilar
     %p.title
-      %b Users that subscibe to this are also reading:
-      %br
-      - @feed.users.each do |user|
-        - user.subscriptions.each do |subscription|
-          = link_to subscription.feed.title, subscription.feed
+      - if @related_feeds != []
+        %b Users that subscibe to this are also reading:
+        %br      
+          - @related_feeds.each do |feed|
+            = link_to feed.title, feed
+
           %br
 
 .feedentries
