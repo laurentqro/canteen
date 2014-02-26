@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @read_entry.user_id
+%p
+  %b Entry:
+  = @read_entry.entry_id
+
+= link_to 'Edit', edit_read_entry_path(@read_entry)
+\|
+= link_to 'Back', read_entries_path

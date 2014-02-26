@@ -8,7 +8,12 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :bio, :avatar, :email, :role, :password, :password_confirmation, :remember_me
 
   has_many :subscriptions, dependent: :destroy
+  has_many :read_entries, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+
+  has_many :feeds, through: :subscriptions
+  has_many :entries, through: :bookmarks
+  has_many :entries, through: :read_entries
 
 
   def is_subscribed?(feed_id)
@@ -21,6 +26,13 @@ class User < ActiveRecord::Base
   def has_bookmarked?(entry_id)
     user_id = self.id
     if Bookmark.exists?(user_id: user_id, entry_id: entry_id)
+      return true
+    end
+  end
+
+  def has_read?(entry_id)
+    user_id = self.id
+    if ReadEntry.exists?(user_id: user_id, entry_id: entry_id)
       return true
     end
   end
