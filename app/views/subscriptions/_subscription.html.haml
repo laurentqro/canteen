@@ -8,7 +8,7 @@
 
 %h3 Untagged Feeds
 
-- @user.subscriptions.each do |subscription|
+- @subscriptions.each do |subscription|
   - if !subscription.tags.any? && current_user.is_subscribed?(subscription.feed.id)
     = link_to subscription.feed.title, subscription.feed
     .icon= link_to image_tag("trash.png", alt: "Remove subscription", :id => 'trash'), subscription.feed, method: :delete, data: { :confirm => 'Are you sure?' }
