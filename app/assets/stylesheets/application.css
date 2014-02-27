@@ -35,6 +35,10 @@ a:hover {
   color: #af0000;
 }
 
+h2 {
+  margin: 0px;
+}
+
 .container {
   margin: 0px;
   padding: 0px;
@@ -68,24 +72,41 @@ a:hover {
   height: 10px;
 }
 
+#bookmarkbig {
+  height: 25px;
+}
+
 #trash {
   height: 10px;
+}
+
+#trashbig {
+  height:25px;
 }
 
 #edit {
   height: 10px;
 }
 
+#editbig {
+  height:25px;
+}
+
 #original {
-  height: 10px;
+  height: 25px;
 }
 
 #unread {
   height: 10px;
 }
 
+#unreadbig {
+  height: 25px;
+}
+
 #subscribe {
   height: 10px;
+  margin-top: 3px;
 }
 
 .subscribeicon {
@@ -177,7 +198,6 @@ a:hover {
 
 .feedimagebig {
   width: 150px;
-  height: 150px;
 /*  border-radius: 20px;
   border: solid #af0000 1px;*/
 /*  margin: 20px;*/
@@ -197,6 +217,27 @@ a:hover {
 .placeholderbig {
   width: 150px;
   margin: auto;
+}
+
+.placeholderavatar {
+  float: left;
+  margin-right: 15px;
+}
+
+.placeholderavatar img {
+  width: 150px;
+  border-radius: 75px;
+  border: 3px solid #af0000;
+}
+
+.profile {
+  display: inline;
+  position: relative;
+  vertical-align: middle;
+}
+
+.profiledetails {
+  float: left;
 }
 
 .feedcontainer {
@@ -239,8 +280,8 @@ li {
   margin-top: 0;
 }
 
-.entrycontent {
-  font-size: 12px;
+.entryshow {
+  margin-bottom: 10px;
 }
 
 .entrycontent img {
@@ -248,6 +289,10 @@ li {
   margin: 0 10px 10px 0;
 }
 
+.entryicons {
+  clear: both;
+  margin-top: 15px;
+}
 
 table { 
   border-collapse:separate; 
@@ -255,7 +300,6 @@ table {
   margin-left: 0; 
 
 }
-
 
 th {
   text-align: left;
