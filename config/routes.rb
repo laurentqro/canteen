@@ -2,7 +2,7 @@ CantineApp::Application.routes.draw do
   resources :read_entries
 
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :entries do 
 

@@ -217,9 +217,13 @@ a:hover {
   margin-top: 20px;
 }
 
-textarea {
-  width: 173px;
-  height: 100px;
+li {
+  list-style-type: none;
+}
+
+.iconleft {
+  float: left;
+  margin-right: 10px;
 }
 
 .icon {

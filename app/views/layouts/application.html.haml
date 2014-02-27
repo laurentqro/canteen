@@ -20,7 +20,8 @@
         #search
           = form_tag feeds_path, method: :get do
             = text_field_tag :q, nil, placeholder: "Feeds, Entries, Users..."
-            = submit_tag "Go"
+            .actions
+              = submit_tag "Go"
 
       #sidebar
         - if current_user
