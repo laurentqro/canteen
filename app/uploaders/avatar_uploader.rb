@@ -48,4 +48,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
+  def default_url
+      "/assets/" + [thumb, "avatar.png"].compact.join('_')
+  end
+
 end

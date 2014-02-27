@@ -199,8 +199,9 @@ a:hover {
   margin: auto;
 }
 
-.placeholderavatar {
+.placeholderavatar img {
   width: 150px;
+  border-radius: 75px;
 }
 
 .feedcontainer {
