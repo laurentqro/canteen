@@ -51,7 +51,7 @@ class FeedsController < ApplicationController
   # POST /feeds.json
   def create
     Feedzirra::Feed.add_common_feed_element 'image'
-    parsed_feed = Feedzirra::Feed.fetch_and_parse(params[:feed][:url])
+    parsed_feed = Feedzirra::Feed.fetch_and_parse(params[:url])
     feed = Feed.new
     if Feed.parse_fail?(parsed_feed)
       redirect_to root_path, notice: 'Invalid URL.'
@@ -79,9 +79,17 @@ class FeedsController < ApplicationController
   # PUT /feeds/1
   # PUT /feeds/1.json
   def update
-    # oh dear
-    create
+    @feed = Feed.find(params[:id])
 
+    respond_to do |format|
+      if @feed.update_attributes(params[:feed])
+        format.html { redirect_to @feed, notice: 'Feed successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @feed.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /feeds/1
@@ -108,10 +116,5 @@ class FeedsController < ApplicationController
       redirect_to Feed.find(params[:id])
     end
   end
-
-
-
-
-
 
 end
