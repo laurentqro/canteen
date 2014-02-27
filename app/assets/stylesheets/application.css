@@ -57,15 +57,62 @@ h2 {
   padding: 20px 15px 5px 15px;
   position: fixed;
   z-index: 1000;
+  display: inline;
+}
+
+#topbarlinks {
+  float: left;
+  margin-left: 40px;
+  font-size: 18px;
 }
 
 #logo {
   width: 200px;
+  float: left;
 }
 
 #search {
   float: right;
   margin-right: 40px;
+}
+
+.submitbuttontop input[type="submit"] {
+  background-color: #1a1a1a;
+  border: none;
+  color: #f7f7f7;
+}
+
+.submitbutton input[type="submit"] {
+  background-color: #af0000;
+  border: none;
+  color: #ffffff;
+}
+
+#user_avatar input[type="submit"] {
+  background-color: #af0000;
+  border: none;
+  color: #ffffff;
+}
+
+#newsubscriptionbutton {
+  position: absolute;
+  bottom: 80px;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+}
+
+.submitbuttonside input[type="submit"] {
+  background-color: #f7f7f7;
+  border: none;
+  color: #af0000;
+}
+
+.submitbuttonsideplus input[type="submit"] {
+  background-color: #f7f7f7;
+  border: none;
+  color: #af0000;
+  font-size: 20px;
 }
 
 #bookmark {
@@ -144,14 +191,6 @@ h2 {
   position:relative;
   padding: 20px;
   float:right;
-}
-
-#newsubscriptionbutton {
-  position: absolute;
-  bottom: 80px;
-  width: 20%;
-  text-align: center;
-  display: inline;
 }
 
 .feedtileparent {
