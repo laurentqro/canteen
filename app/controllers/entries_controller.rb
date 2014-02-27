@@ -12,12 +12,12 @@ class EntriesController < ApplicationController
       unread_entries = all_user_entries.reject {|entry| entry.read_entries.find_by_user_id(current_user.id)}
       
       if params[:read].present? && params[:read] == "true"
-        @entries = unread_entries
+        @entries = Kaminari.paginate_array(unread_entries).page(params[:page]).per(25)
       else
-        @entries = all_user_entries
+        @entries = Kaminari.paginate_array(all_user_entries).page(params[:page]).per(25)
       end
     else
-    @entries = Entry.all 
+    @entries = Entry.page(params[:page])
    end
     respond_to do |format|
       format.html # index.html.erb
