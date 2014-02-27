@@ -1,30 +1,35 @@
-- if params[:q].present?
+- if current_user
 
-  %h2= "Results matching '#{params[:q]}'"
+  - if params[:q].present?
 
-  %h3 Feeds
-  - if @feeds.any?
-    - @feeds.each do |feed|
-      %p= link_to feed.title, feed
+    %h2= "Results matching '#{params[:q]}'"
+
+    %h3 Feeds
+    - if @feeds.any?
+      - @feeds.each do |feed|
+        %p= link_to feed.title, feed
+    - else
+      %em No match found.
+
+    %h3 Entries
+    - if @entries.any?
+      - @entries.each do |entry|
+        %p= link_to entry.title, entry
+    - else
+      %em No match found.
+
+    %h3 Users
+    - if @users.any?
+      - @users.each do |user|
+        %p= link_to user.first_name, user
+    - else
+      %em No match found.
+
   - else
-    %em No match found.
-
-  %h3 Entries
-  - if @entries.any?
-    - @entries.each do |entry|
-      %p= link_to entry.title, entry
-  - else
-    %em No match found.
-
-  %h3 Users
-  - if @users.any?
-    - @users.each do |user|
-      %p= link_to user.first_name, user
-  - else
-    %em No match found.
+    = render @feeds
 
 - else
-  = render @feeds
+  = image_tag("landing.png", alt: "Welcome to Canteen", :id => 'landing')
 
 
 

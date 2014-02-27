@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %title CantineApp
+    %title Canteen - Feed Yourself
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -12,22 +12,26 @@
 
       #topbar
         =link_to image_tag("logo.png", alt: "Canteen Logo", :id => 'logo'), feeds_path
-        - if current_user
-          = link_to "My Profile", user_path(current_user.id)
-        - if current_user
-          = link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to logout?'}
+        #topbarlinks
+          - if current_user
+            = link_to "My Profile", user_path(current_user.id)
+          &nbsp;
+          - if current_user
+            = link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to logout?'}
 
         #search
-          = form_tag feeds_path, method: :get do
-            = text_field_tag :q, nil, placeholder: "Feeds, Entries, Users..."
-            .actions
-              = submit_tag "Go"
+          - if current_user
+            = form_tag feeds_path, method: :get do
+              = text_field_tag :q, nil, placeholder: "Feeds, Entries, Users..."
+              %span{:class => "submitbuttontop"}
+                = submit_tag "Go"
 
       #sidebar
         - if current_user
           %h3= "Hello #{current_user.first_name}"
           %h3
             = link_to 'All Entries', entries_path
+            %span -
             = link_to 'Only Unread', entries_path(read: true)
           = render('subscriptions/subscription.html.haml')
 
@@ -47,9 +51,8 @@
                     - @feed.errors.full_messages.each do |msg|
                       %li= msg
 
-              .field
-                = text_field_tag :url, nil, placeholder: "Enter feed url"
-              .actions
+              = text_field_tag :url, nil, placeholder: "Enter feed url"
+              %span{:class => "submitbuttonsideplus"}
                 = submit_tag '+'
 
       #reader

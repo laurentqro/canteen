@@ -1,4 +1,5 @@
 class ReadEntriesController < ApplicationController
+  load_and_authorize_resource
   # GET /read_entries
   # GET /read_entries.json
   def index

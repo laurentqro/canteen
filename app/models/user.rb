@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
+  before_validation :set_default_role
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -46,6 +48,15 @@ class User < ActiveRecord::Base
       @subscription.feed_id = feed.id
       @subscription.save
     end
+  end
+
+  def role?(role)
+  self.role.to_s == role.to_s
+  end
+
+  private
+  def set_default_role
+    self.role ||= "user"
   end
 
 end

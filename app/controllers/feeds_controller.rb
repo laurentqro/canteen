@@ -1,4 +1,5 @@
 class FeedsController < ApplicationController
+  load_and_authorize_resource
   # GET /feeds
   # GET /feeds.json
   def index
@@ -24,7 +25,7 @@ class FeedsController < ApplicationController
   def show
     @feed = Feed.find(params[:id])
     @related_feeds = @feed.list_related_feeds(current_user)
-
+    @feed_entries = Kaminari.paginate_array(@feed.entries).page(params[:page]).per(16)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @feed }

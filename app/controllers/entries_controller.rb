@@ -1,4 +1,5 @@
 class EntriesController < ApplicationController
+  load_and_authorize_resource
   # GET /entries
   # GET /entries.json
   before_filter :mark_as_read_on_show, only: :show
@@ -11,12 +12,12 @@ class EntriesController < ApplicationController
       unread_entries = all_user_entries.reject {|entry| entry.read_entries.find_by_user_id(current_user.id)}
       
       if params[:read].present? && params[:read] == "true"
-        @entries = unread_entries
+        @entries = Kaminari.paginate_array(unread_entries).page(params[:page]).per(25)
       else
-        @entries = all_user_entries
+        @entries = Kaminari.paginate_array(all_user_entries).page(params[:page]).per(25)
       end
     else
-    @entries = Entry.all 
+    @entries = Entry.page(params[:page])
    end
     respond_to do |format|
       format.html # index.html.erb
@@ -128,6 +129,7 @@ class EntriesController < ApplicationController
   
   private  
   def mark_as_read_on_show 
+  if current_user
     @entry = Entry.find(params[:id])
     if current_user.has_read?(@entry.id) != true
       read_entry = ReadEntry.new
@@ -135,6 +137,7 @@ class EntriesController < ApplicationController
       read_entry.entry_id = params[:id]
       read_entry.save
     end 
+  end
     render 'show'
   end 
   
