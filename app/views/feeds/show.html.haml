@@ -41,5 +41,6 @@
         .iconleft= link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmark'), entries_bookmark_path(entry)
       - if current_user && current_user.has_bookmarked?(entry.id)
         .iconleft= link_to image_tag("bookmark2.png", alt: "Bookmark", :id => 'bookmark'), entries_bookmark_path(entry)
-      = link_to "#{entry.title}", entry    
+      = link_to "#{entry.title}", entry
+      = " // " + time_ago_in_words(entry.published_on)    
 / = link_to 'Back', feeds_path
