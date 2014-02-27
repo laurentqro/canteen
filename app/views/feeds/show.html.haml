@@ -18,8 +18,8 @@
         %br
         = @feed.last_updated.strftime("%a %d %b %Y")
     - if current_user && current_user.is_subscribed?(@feed.id) != true
-      .subscribeicon= link_to image_tag("subscribe.png", alt: "Subscribe", :id => 'subscribebig'), @feed, method: :subscribe
-    %p= link_to 'Update', feeds_update_entries_path(@feed)
+      = link_to image_tag("subscribe.png", alt: "Subscribe", :id => 'subscribebig'), @feed, method: :subscribe
+    = link_to image_tag("update.png", alt: 'Update', :id => 'update'), feeds_update_entries_path(@feed)
 
   .userssimilar
     %p.title
