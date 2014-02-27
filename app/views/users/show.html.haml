@@ -41,9 +41,12 @@
         %p
           =@user.bio
   %br
-  %h4 #{@user.first_name}'s feeds
+  -if @user.first_name != ""
+    %h4 #{@user.first_name}'s feeds
+  -else
+    %h4 User's feeds
   .userfeeds
-    -@user.subscriptions.each do |subscription|
+    -@user.subscriptions.where("private is not ?", true).each do |subscription|
       .feedtileparent
         .feedtileprofile
           - if subscription.feed.image

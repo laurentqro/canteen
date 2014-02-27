@@ -1,7 +1,8 @@
 %h3 All Subscribed Feed Entries
 - if @entries.any?
-  = link_to 'UNREAD', entries_path(read: true)
   = link_to 'ALL', entries_path
+  = link_to 'UNREAD', entries_path(read: true)
+  
   %table
     %tr
       %th Article Title
