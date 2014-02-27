@@ -109,6 +109,10 @@ h2 {
   margin-top: 3px;
 }
 
+#subscribebig {
+  height: 25px;
+}
+
 .subscribeicon {
   margin: auto;
 }
@@ -251,6 +255,7 @@ h2 {
 
 .userssimilar {
   float: right;
+  text-align: right;
 }
 
 .feedentries {
