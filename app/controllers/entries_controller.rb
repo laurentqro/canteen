@@ -2,7 +2,9 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
   def index
-    @entries = Entry.all
+
+    @entries = User.find_by_id(current_user.id).feeds.map {|feed| feed.entries}.flatten
+    
 
     respond_to do |format|
       format.html # index.html.erb

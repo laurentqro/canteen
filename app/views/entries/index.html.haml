@@ -1,0 +1,18 @@
+%h3 All Subscribed Feed Entries
+- if @entries.any?
+  %table
+    %tr
+      %th Article Title
+      %th Feed
+      %th Published
+    
+    - @entries.sort_by { |entry| entry.published_on }.reverse.each do |entry|
+
+      %tr
+        %td
+          %strong 
+            = link_to truncate(entry.title, length: 60), entry
+        %td= truncate(entry.feed.title,  length: 20) 
+        %td= time_ago_in_words(entry.published_on)
+- else
+  %em You have no feeds subscribed.

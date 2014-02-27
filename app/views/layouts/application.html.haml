@@ -25,6 +25,7 @@
       #sidebar
         - if current_user
           %h3= "Hello #{current_user.first_name}"
+          %h3= link_to 'All', entries_path
           = render('subscriptions/subscription.html.haml')
 
         - else
