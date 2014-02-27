@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :setup_feeds, :setup_feed, :setup_subscription, :setup_subscriptions, :setup_tags, :setup_current_user
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url , alert: "You can't access this page"
+  end
+
   private
 
   def setup_feed

@@ -1,4 +1,5 @@
 class BookmarksController < ApplicationController
+  load_and_authorize_resource
   # GET /bookmarks
   # GET /bookmarks.json
   def index

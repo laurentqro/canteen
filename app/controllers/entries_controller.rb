@@ -1,4 +1,5 @@
 class EntriesController < ApplicationController
+  load_and_authorize_resource
   # GET /entries
   # GET /entries.json
   before_filter :mark_as_read_on_show, only: :show
@@ -128,6 +129,7 @@ class EntriesController < ApplicationController
   
   private  
   def mark_as_read_on_show 
+  if current_user
     @entry = Entry.find(params[:id])
     if current_user.has_read?(@entry.id) != true
       read_entry = ReadEntry.new
@@ -135,6 +137,7 @@ class EntriesController < ApplicationController
       read_entry.entry_id = params[:id]
       read_entry.save
     end 
+  end
     render 'show'
   end 
   
