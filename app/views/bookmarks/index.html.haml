@@ -1,4 +1,4 @@
 - @bookmarks.each do |bookmark|
   = link_to bookmark.entry.title, bookmark.entry
-  .icon= link_to image_tag("trash.png", alt: "Remove bookmark", :id => 'trash'), bookmark, method: :delete, data: { :confirm => 'Are you sure?' }
+  .iconleft= link_to image_tag("trash.png", alt: "Remove bookmark", :id => 'trash'), bookmark, method: :delete, data: { :confirm => 'Are you sure?' }
   %br

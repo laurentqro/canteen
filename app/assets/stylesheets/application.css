@@ -217,6 +217,15 @@ a:hover {
   margin-top: 20px;
 }
 
+li {
+  list-style-type: none;
+}
+
+.iconleft {
+  float: left;
+  margin-right: 10px;
+}
+
 .icon {
   float: right;
   margin-right: 10px;
