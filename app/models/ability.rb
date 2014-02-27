@@ -24,6 +24,7 @@ class Ability
       can :subscribe, Feed
       can :bookmark, Entry
       can :mark_as_read, Entry
+      can :update_entries, Feed
 
       can :tagged, Subscription
 

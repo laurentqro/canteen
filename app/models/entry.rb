@@ -24,6 +24,9 @@ class Entry < ActiveRecord::Base
 
   def self.add_entries(entries, feed_id)
     entries.each do |entry|
+      if entry.published.nil?
+        entry.published = Time.now.to_s
+      end
       unless exists? gu_id: entry.id
         create!(
           feed_id: feed_id,

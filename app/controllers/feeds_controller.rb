@@ -22,10 +22,7 @@ class FeedsController < ApplicationController
 
   # GET /feeds/1
   # GET /feeds/1.json
-  def show
-    if params[:update].present? 
-      Entry.update_from_feed(params[:url], params[:id])
-    end  
+  def show 
     @feed = Feed.find(params[:id])
     @related_feeds = @feed.list_related_feeds(current_user)
     @feed_entries = Kaminari.paginate_array(@feed.entries).page(params[:page]).per(16)
@@ -73,7 +70,7 @@ class FeedsController < ApplicationController
         feed.save
         current_user.auto_subscribe(feed)
 
-        Entry.update_from_feed(feed.feed_url, feed.id)
+        Entry.update_from_feed(feed.feed_url, feed.id, feed.last_updated)
 
         redirect_to root_path
       end
@@ -119,6 +116,12 @@ class FeedsController < ApplicationController
       @subscription.save
       redirect_to Feed.find(params[:id])
     end
+  end
+
+  def update_entries
+    feed = Feed.find(params[:id])
+    Entry.update_from_feed(feed.url, feed.id)
+    redirect_to feed
   end
 
 end
