@@ -30,17 +30,26 @@
             %br
 
 .feedentries
-  - @feed.entries.each do |entry|
-
-    %li.entry{:data => {:entry_id => entry.id, :feed_id => @feed.id}}
-      - if current_user && current_user.has_read?(entry.id) != true
-        .iconleft= link_to image_tag("unread.png", alt: "Unread", :id => 'unread'), entries_mark_as_read_path(entry)
-      - if current_user && current_user.has_read?(entry.id)
-        .iconleft= link_to image_tag("unread2.png", alt: "Read", :id => 'unread'), entries_mark_as_read_path(entry)
-      - if current_user && current_user.has_bookmarked?(entry.id) != true
-        .iconleft= link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmark'), entries_bookmark_path(entry)
-      - if current_user && current_user.has_bookmarked?(entry.id)
-        .iconleft= link_to image_tag("bookmark2.png", alt: "Bookmark", :id => 'bookmark'), entries_bookmark_path(entry)
-      = link_to "#{entry.title}", entry
-      = " // " + time_ago_in_words(entry.published_on)    
-/ = link_to 'Back', feeds_path
+  %table
+    %tr
+      %th
+      %th
+      %th
+      %th
+    - @feed.entries.each do |entry|
+      %tr
+        %td
+          - if current_user && current_user.has_read?(entry.id) != true
+            .iconleft= link_to image_tag("unread.png", alt: "Unread", :id => 'unread'), entries_mark_as_read_path(entry)
+          - if current_user && current_user.has_read?(entry.id)
+            .iconleft= link_to image_tag("unread2.png", alt: "Read", :id => 'unread'), entries_mark_as_read_path(entry)
+        %td
+          - if current_user && current_user.has_bookmarked?(entry.id) != true
+            .iconleft= link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmark'), entries_bookmark_path(entry)
+          - if current_user && current_user.has_bookmarked?(entry.id)
+            .iconleft= link_to image_tag("bookmark2.png", alt: "Bookmark", :id => 'bookmark'), entries_bookmark_path(entry)
+        %td
+          %strong
+            = link_to truncate(entry.title, length: 60), entry
+        %td
+          = time_ago_in_words(entry.published_on)
