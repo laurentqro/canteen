@@ -22,7 +22,7 @@
         #search
           = form_tag feeds_path, method: :get do
             = text_field_tag :q, nil, placeholder: "Feeds, Entries, Users..."
-            .actions
+            %span{:class => "submitbuttontop"}
               = submit_tag "Go"
 
       #sidebar
@@ -50,9 +50,8 @@
                     - @feed.errors.full_messages.each do |msg|
                       %li= msg
 
-              .field
-                = text_field_tag :url, nil, placeholder: "Enter feed url"
-              .actions
+              = text_field_tag :url, nil, placeholder: "Enter feed url"
+              %span{:class => "submitbuttonside"}
                 = submit_tag '+'
 
       #reader

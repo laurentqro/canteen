@@ -76,6 +76,27 @@ h2 {
   margin-right: 40px;
 }
 
+.submitbuttontop input[type="submit"] {
+  background-color: #1a1a1a;
+  border: none;
+  color: #f7f7f7;
+}
+
+#newsubscriptionbutton {
+  position: absolute;
+  bottom: 80px;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+}
+
+.submitbuttonside input[type="submit"] {
+  background-color: #f7f7f7;
+  border: none;
+  color: #af0000;
+  font-size: 20px;
+}
+
 #bookmark {
   height: 10px;
 }
@@ -152,14 +173,6 @@ h2 {
   position:relative;
   padding: 20px;
   float:right;
-}
-
-#newsubscriptionbutton {
-  position: absolute;
-  bottom: 80px;
-  width: 20%;
-  text-align: center;
-  display: inline;
 }
 
 .feedtileparent {
