@@ -6,7 +6,7 @@ class Entry < ActiveRecord::Base
   has_many :users, through: :bookmarks
   has_many :users, through: :read_entries
 
-  def self.update_from_feed(feed_url, feed_id)
+  def self.create_from_feed(feed_url, feed_id)
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
     feed.entries.each do |entry|
       unless exists? gu_id: entry.id

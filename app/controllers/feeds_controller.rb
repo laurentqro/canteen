@@ -23,9 +23,12 @@ class FeedsController < ApplicationController
   # GET /feeds/1.json
   def show
     @feed = Feed.find(params[:id])
-    Entry.update_from_feed(@feed.feed_url, @feed.id)
 
     @related_feeds = @feed.list_related_feeds(current_user)
+
+    # if @feed.updated?
+    #   updated_feed = Feedzirra::Feed.update(feed)
+    #   @new_entries =
 
     respond_to do |format|
       format.html # show.html.erb
@@ -70,6 +73,9 @@ class FeedsController < ApplicationController
         feed.last_updated = parsed_feed.last_modified
         feed.save
         current_user.auto_subscribe(feed)
+
+        Entry.create_from_feed(feed.feed_url, feed.id)
+
         redirect_to root_path
       end
     end
@@ -110,7 +116,7 @@ class FeedsController < ApplicationController
 
 
 
-  
+
 
 
 end
