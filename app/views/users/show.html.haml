@@ -1,14 +1,14 @@
 -if current_user == @user
   .userfeeds
-    .placeholderavatar= image_tag @user.avatar.thumb
-    %br
-    %h4
-      =@user.first_name
-      =@user.last_name
-    %p
-      = @user.email
-    %br
-    %h4 Your feeds
+    .profile
+      .placeholderavatar= image_tag @user.avatar.thumb
+      .profiledetails
+        %h2
+          =@user.first_name
+          =@user.last_name
+        %p
+          = @user.email
+  %h4 Your feeds
   .userfeeds
     -@current_user.subscriptions.each do |subscription|
       .feedtileparent
@@ -25,20 +25,23 @@
     %p
       =@user.bio
     %br
-    =link_to 'Edit Profile',  edit_user_registration_path
-    =link_to 'Delete Profile', users_path, method: :delete, data: { confirm: 'Are you sure?' }
+    .iconleft= link_to image_tag("edit.png", alt: "Edit Profile", :id => 'editbig'), edit_user_registration_path
+    .iconleft= link_to image_tag("trash.png", alt: "Delete Profile", :id => 'trashbig'), users_path, method: :delete, data: { :confirm => 'Are you sure?' }
 
 -else
   .userfeeds
-    = image_tag @user.avatar
-    %br
-    %h4
-      =@user.first_name
-      =@user.last_name
-    %p
-      =@user.bio
-    %br
-    %h4 #{@user.first_name}'s feeds
+    .profile
+      .placeholderavatar= image_tag @user.avatar.thumb
+      .profiledetails
+        %h2
+          =@user.first_name
+          =@user.last_name
+        %p
+          = @user.email
+        %p
+          =@user.bio
+  %br
+  %h4 #{@user.first_name}'s feeds
   .userfeeds
     -@user.subscriptions.each do |subscription|
       .feedtileparent
