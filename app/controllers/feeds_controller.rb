@@ -70,7 +70,7 @@ class FeedsController < ApplicationController
         feed.save
         current_user.auto_subscribe(feed)
 
-        Entry.update_from_feed(feed.feed_url, feed.id, feed.last_updated)
+        Entry.update_from_feed(feed.feed_url, feed.id)
 
         redirect_to root_path
       end
