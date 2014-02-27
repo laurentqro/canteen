@@ -1,17 +1,21 @@
 - content_for :sidebar do
-  %h2 Change your password
-
   = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
     = devise_error_messages!
     = f.hidden_field :reset_password_token
-
+    %br
+    %br
     = f.label :password, "New password"
     = f.password_field :password, :autofocus => true
-
+    %br
+    %br
     = f.label :password_confirmation, "Confirm new password"
     = f.password_field :password_confirmation
-
-    = f.submit "Change my password"
+    %br
+    %br
+    .submitbutton= f.submit "Change my password"
+    %br
+    %br
+    = devise_error_messages!
 
   = render "devise/shared/links"
 

@@ -82,6 +82,18 @@ h2 {
   color: #f7f7f7;
 }
 
+.submitbutton input[type="submit"] {
+  background-color: #af0000;
+  border: none;
+  color: #ffffff;
+}
+
+#user_avatar input[type="submit"] {
+  background-color: #af0000;
+  border: none;
+  color: #ffffff;
+}
+
 #newsubscriptionbutton {
   position: absolute;
   bottom: 80px;
@@ -91,6 +103,12 @@ h2 {
 }
 
 .submitbuttonside input[type="submit"] {
+  background-color: #f7f7f7;
+  border: none;
+  color: #af0000;
+}
+
+.submitbuttonsideplus input[type="submit"] {
   background-color: #f7f7f7;
   border: none;
   color: #af0000;
