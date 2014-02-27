@@ -20,6 +20,7 @@ class Feed < ActiveRecord::Base
         end
       end
     end
+    feeds.sort_by { |feed| feed.users.count }
     feeds.uniq
   end
 
