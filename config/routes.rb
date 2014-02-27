@@ -18,5 +18,8 @@ CantineApp::Application.routes.draw do
 
   get 'tagged', to: 'subscriptions#tagged', :as => 'tagged'
 
+  resources :entries do
+  get 'page/:page', action: :index, on: :collection
+  end
 
 end

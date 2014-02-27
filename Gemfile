@@ -33,6 +33,7 @@ gem 'ransack'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'cancan'
+gem 'kaminari'
 
 group :production do
   gem 'pg'
