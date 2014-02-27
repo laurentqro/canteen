@@ -8,7 +8,20 @@ class Entry < ActiveRecord::Base
 
   def self.update_from_feed(feed_url, feed_id)
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
-    feed.entries.each do |entry|
+    add_entries(feed.entries, feed_id)
+
+    # Replace following code with a delayed worker
+
+    # loop do
+    #   sleep delay_interval
+    #   feed = Feedzirra::Feed.update(feed)
+    #   add_entries(feed.new_entries) if feed.updated?
+    # end
+
+  end
+
+  def self.add_entries(entries, feed_id)
+    entries.each do |entry|
       unless exists? gu_id: entry.id
         create!(
           feed_id: feed_id,
