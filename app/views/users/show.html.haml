@@ -25,7 +25,7 @@
     %p
       =@user.bio
     %br
-    =link_to 'Edit Profile',  edit_user_path(@user)
+    =link_to 'Edit Profile',  edit_user_registration_path
     =link_to 'Delete Profile', @user, method: :delete, data: { confirm: 'Are you sure?' }
 
 -else
