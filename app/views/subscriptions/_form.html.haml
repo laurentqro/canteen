@@ -1,20 +1,20 @@
 .feedcontainer
   .feedimagebig
-    -if @feed.image
-      = image_tag @feed.image
+    -if @subscription.feed.image
+      = image_tag @subscription.feed.image
     -else
       .placeholderbig= image_tag("placeholder.png")
 
   .feeddetails
     %h2.title
-      = @feed.title
+      = @subscription.feed.title
     %p
-      = @feed.url
+      = @subscription.feed.url
     %p
       -if @feed.last_updated
         %b Last updated:
         %br
-        = @feed.last_updated.strftime("%a %d %b %Y")
+        = @subscription.feed.last_updated.strftime("%a %d %b %Y")
 
 = form_for @subscription do |f|
   - if @subscription.errors.any?
