@@ -14,12 +14,12 @@
       .feedtileparent
         .feedtileprofile
           - if subscription.feed.image
-            = link_to(image_tag(subscription.feed.image), feed_path)
+            = link_to(image_tag(subscription.feed.image), feed_path(subscription.feed))
           - else
-            .placeholder= link_to(image_tag("placeholder.png"), feed_path)
+            .placeholder= link_to(image_tag("placeholder.png"), feed_path(subscription.feed))
           %br
         .feedtiletext
-          = link_to "#{subscription.feed.title}", feed_path
+          = link_to "#{subscription.feed.title}", feed_path(subscription.feed)
   .userfeeds
     %h4 About Me
     %p
@@ -47,10 +47,10 @@
       .feedtileparent
         .feedtileprofile
           - if subscription.feed.image
-            = link_to(image_tag(subscription.feed.image), feed_path)
+            = link_to(image_tag(subscription.feed.image), feed_path(subscription.feed))
           - else
-            .placeholder= link_to(image_tag("placeholder.png"), feed_path)
+            .placeholder= link_to(image_tag("placeholder.png"), feed_path(subscription.feed))
           %br
         .feedtiletext
-          = link_to "#{subscription.feed.title}", feed_path
+          = link_to "#{subscription.feed.title}", feed_path(subscription.feed)
     
