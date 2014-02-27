@@ -29,6 +29,8 @@ gem 'devise'
 gem 'feedzirra'
 gem 'heroku'
 gem 'ransack'
+gem 'carrierwave'
+gem 'rmagick'
 
 group :production do
   gem 'pg'
