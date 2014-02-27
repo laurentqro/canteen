@@ -1,17 +1,26 @@
-%h3 All Subscribed Feed Entries
+
 - if @entries.any?
-  = link_to 'ALL', entries_path
-  = link_to 'UNREAD', entries_path(read: true)
-  
   %table
     %tr
-      %th Article Title
-      %th Feed
-      %th Published
+      %th
+      %th
+      %th
+      %th
+      %th
     
     - @entries.sort_by { |entry| entry.published_on }.reverse.each do |entry|
 
       %tr
+        %td
+          - if current_user && current_user.has_read?(entry.id) != true
+            .iconleft= link_to image_tag("unread.png", alt: "Unread", :id => 'unread'), entries_mark_as_read_path(entry)
+          - if current_user && current_user.has_read?(entry.id)
+            .iconleft= link_to image_tag("unread2.png", alt: "Read", :id => 'unread'), entries_mark_as_read_path(entry)
+        %td
+          - if current_user && current_user.has_bookmarked?(entry.id) != true
+            .iconleft= link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmark'), entries_bookmark_path(entry)
+          - if current_user && current_user.has_bookmarked?(entry.id)
+            .iconleft= link_to image_tag("bookmark2.png", alt: "Bookmark", :id => 'bookmark'), entries_bookmark_path(entry)
         %td
           %strong 
             = link_to truncate(entry.title, length: 60), entry
