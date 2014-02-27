@@ -23,6 +23,9 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
+    if params[:update].present? 
+      Entry.update_from_feed(params[:url], params[:id])
+    end  
     @feed = Feed.find(params[:id])
     @related_feeds = @feed.list_related_feeds(current_user)
     @feed_entries = Kaminari.paginate_array(@feed.entries).page(params[:page]).per(16)
