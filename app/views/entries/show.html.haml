@@ -1,15 +1,16 @@
 .entryshow
 
   - if @entry.title
-    = @entry.title
+    %h2= @entry.title
+  %br
   - if @entry.author
     = @entry.author
-  -unless @entry.image == nil
-    = image_tag @entry.image
   %p
     %b Published on:
     -if @entry.published_on
       = @entry.published_on.strftime("%a %d %b %Y")
+  / -unless @entry.image == nil
+  /   = image_tag @entry.image
   .entrycontent
     = @entry.summary.html_safe
 
