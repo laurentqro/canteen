@@ -1,11 +1,23 @@
 class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
+  before_filter :mark_as_read_on_show, only: :show
+
   def index
-
-    @entries = User.find_by_id(current_user.id).feeds.map {|feed| feed.entries}.flatten
     
-
+    @entries = Entry.all
+    if current_user
+      all_user_entries = User.find_by_id(current_user.id).feeds.map {|feed| feed.entries}.flatten
+      unread_entries = all_user_entries.reject {|entry| entry.read_entries.find_by_user_id(current_user.id)}
+      
+      if params[:read].present? && params[:read] == "true"
+        @entries = unread_entries
+      else
+        @entries = all_user_entries
+      end
+    else
+    @entries = Entry.all 
+   end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @entries }
@@ -15,6 +27,7 @@ class EntriesController < ApplicationController
   # GET /entries/1
   # GET /entries/1.json
   def show
+    mark_as_read
     @entry = Entry.find(params[:id])
 
     respond_to do |format|
@@ -112,6 +125,17 @@ class EntriesController < ApplicationController
       redirect_to @entry.feed
     end 
   end
-    
+  
+  private  
+  def mark_as_read_on_show 
+    @entry = Entry.find(params[:id])
+    if current_user.has_read?(@entry.id) != true
+      read_entry = ReadEntry.new
+      read_entry.user_id = current_user.id
+      read_entry.entry_id = params[:id]
+      read_entry.save
+    end 
+    render 'show'
+  end 
   
 end
