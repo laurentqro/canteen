@@ -1,6 +1,6 @@
 -if current_user == @user
   .userfeeds
-    = image_tag @user.avatar
+    .placeholderavatar= image_tag @user.avatar.thumb
     %br
     %h4
       =@user.first_name
