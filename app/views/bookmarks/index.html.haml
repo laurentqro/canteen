@@ -1,4 +1,19 @@
-- @bookmarks.each do |bookmark|
-  = link_to bookmark.entry.title, bookmark.entry
-  .iconleft= link_to image_tag("trash.png", alt: "Remove bookmark", :id => 'trash'), bookmark, method: :delete, data: { :confirm => 'Are you sure?' }
-  %br
+- if @bookmarks.any?
+  %table
+    %tr
+      %th
+      %th
+      %th
+      %th
+    
+    - @bookmarks.each do |bookmark|
+
+      %tr
+        %td= link_to image_tag("trash.png", alt: "Remove bookmark", :id => 'trash'), bookmark, method: :delete, data: { :confirm => 'Are you sure?' }
+        %td
+          %strong 
+            = link_to truncate(bookmark.entry.title, length: 60), bookmark.entry
+        %td= truncate(bookmark.entry.feed.title,  length: 20) 
+        %td= time_ago_in_words(bookmark.entry.published_on)
+- else
+  %em You have no bookmarks.
