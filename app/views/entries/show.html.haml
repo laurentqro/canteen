@@ -16,7 +16,10 @@
       = @entry.published_on.strftime("%a %d %b %Y")
 
   = link_to image_tag("original.png", alt: "View Original Source", :id => 'original'), @entry.url
-  = link_to image_tag("unread.png", alt: "Mark Unread", :id => 'unread'), controller: :entries, action: :mark_as_read
+  - if ReadEntry.exists?(user_id: current_user.id, entry_id: @entry.id)
+    = link_to image_tag("unread2.png", alt: "Unread", :id => 'unread'), controller: :entries, action: :mark_as_read
+  - else
+    = link_to image_tag("unread.png", alt: "Read", :id => 'unread'), controller: :entries, action: :mark_as_read
   - if Bookmark.exists?(user_id: current_user.id, entry_id: @entry.id)
     = link_to image_tag("bookmark2.png", alt: "Bookmark", :id => 'bookmark'), controller: :entries, action: :bookmark
   - else
