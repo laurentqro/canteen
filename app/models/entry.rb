@@ -6,6 +6,8 @@ class Entry < ActiveRecord::Base
   has_many :users, through: :bookmarks
   has_many :users, through: :read_entries
 
+
+
   def self.update_from_feed(feed_url, feed_id)
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
     add_entries(feed.entries, feed_id)
@@ -37,5 +39,8 @@ class Entry < ActiveRecord::Base
       end
     end
   end
+
+ 
+
 
 end

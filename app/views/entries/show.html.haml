@@ -1,27 +1,27 @@
 .entryshow
-  %p#notice= notice
 
-  %p
+  - if @entry.title
     = @entry.title
-  %p
+  - if @entry.author
     = @entry.author
-  %p
-    -unless @entry.image == nil
-      = image_tag @entry.image
-  .entrycontent
-    = @entry.summary.html_safe
+  -unless @entry.image == nil
+    = image_tag @entry.image
   %p
     %b Published on:
     -if @entry.published_on
       = @entry.published_on.strftime("%a %d %b %Y")
+  .entrycontent
+    = @entry.summary.html_safe
 
-  = link_to image_tag("original.png", alt: "View Original Source", :id => 'original'), @entry.url
-  - if ReadEntry.exists?(user_id: current_user.id, entry_id: @entry.id)
-    = link_to image_tag("unread2.png", alt: "Unread", :id => 'unread'), controller: :entries, action: :mark_as_read
-  - else
-    = link_to image_tag("unread.png", alt: "Read", :id => 'unread'), controller: :entries, action: :mark_as_read
-  - if Bookmark.exists?(user_id: current_user.id, entry_id: @entry.id)
-    = link_to image_tag("bookmark2.png", alt: "Bookmark", :id => 'bookmark'), controller: :entries, action: :bookmark
-  - else
-    = link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmark'), controller: :entries, action: :bookmark
+  .entryicons
+    .iconleft= link_to image_tag("back.png", alt: "Back to Feed", :id => 'back'), feed_path(@entry.feed.id)
+    .iconleft= link_to image_tag("original.png", alt: "View Original Source", :id => 'original'), @entry.url
+    - if ReadEntry.exists?(user_id: current_user.id, entry_id: @entry.id)
+      .iconleft= link_to image_tag("unread2.png", alt: "Unread", :id => 'unreadbig'), controller: :entries, action: :mark_as_read
+    - else
+      .iconleft= link_to image_tag("unread.png", alt: "Read", :id => 'unreadbig'), controller: :entries, action: :mark_as_read
+    - if Bookmark.exists?(user_id: current_user.id, entry_id: @entry.id)
+      .iconleft= link_to image_tag("bookmark2.png", alt: "Bookmark", :id => 'bookmarkbig'), controller: :entries, action: :bookmark
+    - else
+      .iconleft= link_to image_tag("bookmark.png", alt: "Bookmark", :id => 'bookmarkbig'), controller: :entries, action: :bookmark
 
