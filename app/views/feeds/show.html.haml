@@ -26,7 +26,7 @@
       - if @related_feeds != []
         %b Users that subscibe to this are also reading:
         %br
-        %br      
+        %br
           - @related_feeds[0..4].each do |feed|
             = link_to feed.title, feed
             %br
@@ -54,5 +54,5 @@
           %strong
             = link_to truncate(entry.title, length: 60), entry
         %td
-          = time_ago_in_words(entry.published_on)
-  = paginate @feed_entries        
+          = time_ago_in_words(entry.updated_at)
+  = paginate @feed_entries

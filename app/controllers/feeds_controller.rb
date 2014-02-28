@@ -22,10 +22,10 @@ class FeedsController < ApplicationController
 
   # GET /feeds/1
   # GET /feeds/1.json
-  def show 
+  def show
     @feed = Feed.find(params[:id])
     @related_feeds = @feed.list_related_feeds(current_user)
-    @feed_entries = Kaminari.paginate_array(@feed.entries).page(params[:page]).per(16)
+    @feed_entries = Entry.where(feed_id: @feed.id).order("updated_at DESC").page(params[:page]).per(10)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @feed }

@@ -36,6 +36,7 @@ gem 'cancan'
 gem 'kaminari'
 gem 'sidekiq'
 gem 'sinatra', require: false
+gem 'whenever', require: false # CRON job
 
 group :production do
   gem 'pg'

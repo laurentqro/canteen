@@ -23,7 +23,7 @@ class Entry < ActiveRecord::Base
       if entry.published.nil?
         entry.published = Time.now.to_s
       end
-      unless exists? gu_id: entry.id
+      unless exists? gu_id: entry.url
         create!(
           feed_id: feed_id,
           title: entry.title,
