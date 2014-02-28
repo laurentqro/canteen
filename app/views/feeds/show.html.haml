@@ -55,4 +55,4 @@
             = link_to truncate(entry.title, length: 60), entry
         %td
           = time_ago_in_words(entry.published_on)
-    = paginate @feed_entries        
+  = paginate @feed_entries        
