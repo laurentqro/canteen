@@ -1,7 +1,10 @@
 CantineApp::Application.routes.draw do
 
   root to: 'feeds#index'
-  
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web, at: '/sidekiq'
+
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :entries

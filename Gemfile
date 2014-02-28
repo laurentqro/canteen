@@ -34,6 +34,8 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'cancan'
 gem 'kaminari'
+gem 'sidekiq'
+gem 'sinatra', require: false
 
 group :production do
   gem 'pg'
