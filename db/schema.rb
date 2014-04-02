@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140226180303) do
+ActiveRecord::Schema.define(:version => 20140402154127) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "entry_id"
@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(:version => 20140226180303) do
   end
 
   create_table "read_entries", :force => true do |t|
-    t.string   "user_id"
-    t.string   "entry_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "user_id",    :limit => 255
+    t.integer  "entry_id",   :limit => 255
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "subscriptions", :force => true do |t|
