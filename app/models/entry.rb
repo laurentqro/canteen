@@ -28,7 +28,6 @@ class Entry < ActiveRecord::Base
           feed_id: feed_id,
           title: entry.title,
           summary: entry.summary,
-          image: entry.summary[/img.*?src="(.*?)"/i,1],
           url: entry.url,
           author: entry.author,
           published_on: entry.published,

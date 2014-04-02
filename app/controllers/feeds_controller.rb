@@ -120,7 +120,7 @@ class FeedsController < ApplicationController
 
   def update_entries
     feed = Feed.find(params[:id])
-    Entry.update_from_feed(feed.url, feed.id)
+    Entry.update_from_feed(feed.feed_url, feed.id)
     redirect_to feed
   end
 

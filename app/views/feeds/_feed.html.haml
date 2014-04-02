@@ -2,10 +2,7 @@
 
   .feedtileparent
     .feedtile
-      - if feed.image
-        = link_to(image_tag(feed.image), feed)
-      - else
-        .placeholder= link_to(image_tag("placeholder.png"), feed)
+      .placeholder= link_to(image_tag("placeholder.png"), feed)
     .feedtiletext
       = link_to "#{feed.title}", feed
       - if current_user && current_user.is_subscribed?(feed.id) != true
