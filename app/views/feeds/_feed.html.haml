@@ -1,10 +1,15 @@
-.feedtileparent
-  .feedtile
-    - if feed.image
-      = link_to(image_tag(feed.image), feed)
-    - else
-      .placeholder= link_to(image_tag("placeholder.png"), feed)
-  .feedtiletext
-    = link_to "#{feed.title}", feed
-    - if current_user && current_user.is_subscribed?(feed.id) != true
-      .subscribeicon= link_to image_tag("subscribe.png", alt: "Subscribe", :id => 'subscribe'), feed, method: :subscribe
+- if current_user
+
+  .feedtileparent
+    .feedtile
+      - if feed.image
+        = link_to(image_tag(feed.image), feed)
+      - else
+        .placeholder= link_to(image_tag("placeholder.png"), feed)
+    .feedtiletext
+      = link_to "#{feed.title}", feed
+      - if current_user && current_user.is_subscribed?(feed.id) != true
+        .subscribeicon= link_to image_tag("subscribe.png", alt: "Subscribe", :id => 'subscribe'), feed, method: :subscribe
+
+- else
+  = image_tag("landing.png", alt: "Welcome to Canteen", :id => 'landing')

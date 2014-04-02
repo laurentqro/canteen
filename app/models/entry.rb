@@ -1,5 +1,6 @@
 class Entry < ActiveRecord::Base
   attr_accessible :author, :content, :feed_id, :image, :published_on, :summary, :title, :url, :gu_id
+
   belongs_to :feed
   has_many :bookmarks, dependent: :destroy
   has_many :read_entries, dependent: :destroy
@@ -11,20 +12,18 @@ class Entry < ActiveRecord::Base
   def self.update_from_feed(feed_url, feed_id)
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
     add_entries(feed.entries, feed_id)
+  end
 
-    # Replace following code with a delayed worker
-
-    # loop do
-    #   sleep delay_interval
-    #   feed = Feedzirra::Feed.update(feed)
-    #   add_entries(feed.new_entries) if feed.updated?
-    # end
-
+  def self.update_all_feeds
+    UpdateWorker.perform_async('update_all_feeds', 25)
   end
 
   def self.add_entries(entries, feed_id)
     entries.each do |entry|
-      unless exists? gu_id: entry.id
+      if entry.published.nil?
+        entry.published = Time.now.to_s
+      end
+      unless exists? gu_id: entry.url
         create!(
           feed_id: feed_id,
           title: entry.title,
@@ -39,8 +38,5 @@ class Entry < ActiveRecord::Base
       end
     end
   end
-
- 
-
 
 end

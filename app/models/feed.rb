@@ -6,7 +6,7 @@ class Feed < ActiveRecord::Base
   has_many :users, through: :subscriptions
 
   def self.parse_fail?(feed)
-    feed == 0 || feed == 404 || feed == 408
+    feed == 0 || feed == 404 || feed == 408 || feed == 200 || feed == []
   end
 
   def list_related_feeds(current_user)

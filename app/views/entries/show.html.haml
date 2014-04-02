@@ -7,8 +7,8 @@
     = @entry.author
   %p
     %b Published on:
-    -if @entry.published_on
-      = @entry.published_on.strftime("%a %d %b %Y")
+    -if @entry.updated_at
+      = @entry.updated_at.strftime("%a %d %b %Y")
   / -unless @entry.image == nil
   /   = image_tag @entry.image
   .entrycontent

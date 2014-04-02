@@ -25,7 +25,7 @@ class FeedsController < ApplicationController
   def show
     @feed = Feed.find(params[:id])
     @related_feeds = @feed.list_related_feeds(current_user)
-    @feed_entries = Kaminari.paginate_array(@feed.entries).page(params[:page]).per(16)
+    @feed_entries = Entry.where(feed_id: @feed.id).order("updated_at DESC").page(params[:page]).per(10)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @feed }
@@ -116,6 +116,12 @@ class FeedsController < ApplicationController
       @subscription.save
       redirect_to Feed.find(params[:id])
     end
+  end
+
+  def update_entries
+    feed = Feed.find(params[:id])
+    Entry.update_from_feed(feed.url, feed.id)
+    redirect_to feed
   end
 
 end

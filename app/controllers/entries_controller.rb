@@ -5,12 +5,12 @@ class EntriesController < ApplicationController
   before_filter :mark_as_read_on_show, only: :show
 
   def index
-    
+
     @entries = Entry.all
     if current_user
       all_user_entries = User.find_by_id(current_user.id).feeds.map {|feed| feed.entries}.flatten
       unread_entries = all_user_entries.reject {|entry| entry.read_entries.find_by_user_id(current_user.id)}
-      
+
       if params[:read].present? && params[:read] == "true"
         @entries = Kaminari.paginate_array(unread_entries).page(params[:page]).per(25)
       else
@@ -103,32 +103,32 @@ class EntriesController < ApplicationController
       bookmark = Bookmark.where('user_id = ? AND entry_id = ?', current_user.id, @entry.id)[0]
       bookmark.destroy
       redirect_to @entry.feed
-    else  
+    else
       @bookmark = Bookmark.new
       @bookmark.user_id = current_user.id
       @bookmark.entry_id = params[:id]
       @bookmark.save
       redirect_to @entry.feed
-    end 
+    end
   end
 
   def mark_as_read
     @entry = Entry.find(params[:id])
     if current_user.has_read?(@entry.id)
       read_entry = ReadEntry.where('user_id = ? AND entry_id = ?', current_user.id, @entry.id)[0]
-      read_entry.destroy 
+      read_entry.destroy
       redirect_to @entry.feed
-    else  
+    else
       @read_entry = ReadEntry.new
       @read_entry.user_id = current_user.id
       @read_entry.entry_id = params[:id]
       @read_entry.save
       redirect_to @entry.feed
-    end 
+    end
   end
-  
-  private  
-  def mark_as_read_on_show 
+
+  private
+  def mark_as_read_on_show
   if current_user
     @entry = Entry.find(params[:id])
     if current_user.has_read?(@entry.id) != true
@@ -136,9 +136,9 @@ class EntriesController < ApplicationController
       read_entry.user_id = current_user.id
       read_entry.entry_id = params[:id]
       read_entry.save
-    end 
+    end
   end
     render 'show'
-  end 
-  
+  end
+
 end
