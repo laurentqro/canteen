@@ -28,20 +28,6 @@
 
       #sidebar
         - if current_user
-          %h3= "Hello #{current_user.first_name}"
-          %h3
-            = link_to 'All Entries', entries_path
-            %span -
-            = link_to 'Only Unread', entries_path(read: true)
-          = render('subscriptions/subscription.html.haml')
-
-        - else
-          - unless content_for?(:sidebar)
-            = render('devise/sessions/new.html.haml')
-
-          = yield(:sidebar)
-
-        - if current_user
           #newsubscriptionbutton
             = form_tag feeds_path, method: :post do
               - if @feed.errors.any?
@@ -54,6 +40,20 @@
               = text_field_tag :url, nil, placeholder: "Enter feed url"
               %span{:class => "submitbuttonsideplus"}
                 = submit_tag '+'
+          %h3
+            = link_to 'All Entries', entries_path
+            %span -
+            = link_to 'Only Unread', entries_path(read: true)
+          = render('subscriptions/subscription.html.haml')
+
+        - else
+          - unless content_for?(:sidebar)
+            = render('devise/sessions/new.html.haml')
+
+          = yield(:sidebar)
+
+       
+          
 
       #reader
         = yield

@@ -1,9 +1,6 @@
 .feedcontainer
   .feedimagebig
-    -if @subscription.feed.image
-      = image_tag @subscription.feed.image
-    -else
-      .placeholderbig= image_tag("placeholder.png")
+    .placeholderbig= image_tag("placeholder.png")
 
   .feeddetails
     %h2.title
@@ -26,7 +23,7 @@
   .field
     = f.label :tags
     %br
-    = f.text_field :tag_list
+    = f.text_field :tag_list, id: "taginput", placeholder: "enter tags here, separated by commas"
     %br
     %br
     = f.label "Private Subscription?"
